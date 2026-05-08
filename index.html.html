@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Color Palette (Earth Tone / Minimal) --- */
+        :root {
+            --bg-color: #FDFBF7;
+            --text-dark: #3E3B38;
+            --text-light: #7A756F;
+            --primary-color: #A38C7A;
+            --secondary-color: #E2D7CE;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(253, 251, 247, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+        .typewriter {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            overflow: hidden;
+            border-right: .15em solid var(--primary-color);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-color); }
+        }
+
+        /* --- Global Section Style --- */
+        section {
+            padding: 100px 10vw;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* --- Portfolio Section --- */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 8px 20px;
+            border: 1px solid var(--secondary-color);
+            background: transparent;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Prompt', sans-serif;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        .portfolio-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        .portfolio-image {
+            width: 100%;
+            height: 450px;
+            background-color: var(--secondary-color);
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .portfolio-card:hover .portfolio-image {
+            transform: scale(1.05);
+        }
+        .portfolio-info {
+            padding: 20px;
+        }
+        .portfolio-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        .portfolio-info p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* --- Scroll Reveal Animation --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Contact --- */
+        .contact {
+            text-align: center;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 60px 20px;
+        }
+        .contact a {
+            color: var(--white);
+            text-decoration: underline;
+            margin: 0 10px;
+        }
+
+        /* --- Video Display Styles --- */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* --- About Section Styles --- */
+        .profile-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--secondary-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            opacity: 0.95;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .profile-img:hover {
+            transform: scale(1.1) translateY(-10px);
+            box-shadow: 0 15px 30px rgba(163, 140, 122, 0.2);
+            opacity: 1;
+        }
+
+        /* --- Resume Styles --- */
+        .resume-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 50px;
+            margin-top: 30px;
+        }
+        .resume-column h3 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 15px;
+        }
+        .resume-entry {
+            position: relative;
+            margin-bottom: 0;
+            padding-left: 30px;
+            padding-bottom: 30px;
+            border-left: 2px solid var(--secondary-color);
+            transition: all 0.3s ease;
+            border-radius: 0 15px 15px 0;
+        }
+        .resume-entry:hover {
+            background-color: var(--white);
+            box-shadow: 0 10px 30px rgba(163, 140, 122, 0.1);
+        }
+        .resume-entry:last-child { 
+            border-left: 2px solid transparent; 
+        }
+        .resume-entry::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            border: 2px solid var(--white);
+            z-index: 1;
+        }
+        /* สีสันสำหรับจุด Timeline Marker แยกตามลำดับรายการ */
+        .resume-entry:nth-of-type(1)::before { background-color: #D4A373; } /* สีส้มอิฐ */
+        .resume-entry:nth-of-type(2)::before { background-color: #8E9775; } /* สีเขียวหม่น */
+        .resume-entry:nth-of-type(3)::before { background-color: #6D8299; } /* สีฟ้าเทา */
+        .resume-entry:nth-of-type(4)::before { background-color: #A38C7A; } /* สีน้ำตาลหลัก */
+        .resume-entry:nth-of-type(5)::before { background-color: #C2B280; } /* สีเหลืองทราย */
+        .resume-entry:nth-of-type(6)::before { background-color: #A5A5A5; } /* สีเทาเงิน */
+        .resume-entry:nth-of-type(7)::before { background-color: #D4A373; } 
+        .resume-entry:nth-of-type(8)::before { background-color: #8E9775; }
+
+        .resume-entry h4 { font-size: 1.25rem; margin-bottom: 5px; color: var(--text-dark); font-weight: 700; }
+        .resume-entry .date { color: var(--primary-color); font-weight: 600; font-size: 1rem; margin-bottom: 10px; display: block; }
+        .resume-entry p { font-size: 1.05rem; line-height: 1.7; }
+        
+        /* --- Resume Social Links --- */
+        .resume-social {
+            margin-top: 12px;
+            display: flex;
+            gap: 15px;
+        }
+        .social-link {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.3s;
+        }
+        .social-link:hover {
+            color: var(--primary-color);
+        }
+
+        .skill-list, .lang-list, .interest-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        .tag-item {
+            background: var(--white);
+            border: 1px solid var(--secondary-color);
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 1.05rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .skill-category {
+            font-size: 0.95rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* สีพื้นหลังแยกตามกลุ่มทักษะ */
+        .skill-list.video-group .tag-item { background-color: #F8F1EB; border-color: #EADBC8; }
+        .skill-list.design-group .tag-item { background-color: #F1F4E9; border-color: #DDE5B6; }
+        .skill-list.ai-group .tag-item { background-color: #EEF2F5; border-color: #DBE1E3; }
+
+        /* สีพื้นหลังสำหรับหัวข้อ Interests เพื่อสื่อถึงอารมณ์ของแต่ละงานอดิเรก */
+        .interest-list .tag-item:nth-child(1) { background-color: #F8E9E9; border-color: #E6CECE; } /* ดูหนัง - ชมพูระเรื่อ */
+        .interest-list .tag-item:nth-child(2) { background-color: #FEF9E7; border-color: #F9E79F; } /* วาไรตี้ - เหลืองนวล */
+        .interest-list .tag-item:nth-child(3) { background-color: #EBF5FB; border-color: #AED6F1; } /* ข่าวสาร - ฟ้าอ่อน */
+        .interest-list .tag-item:nth-child(4) { background-color: #F4ECF7; border-color: #D7BDE2; } /* เล่นเกม - ม่วงอ่อน */
+        .interest-list .tag-item:nth-child(5) { background-color: #FDF2E9; border-color: #F5CBA7; } /* ฟังเพลง - ส้มสว่างอ่อน */
+        .interest-list .tag-item:nth-child(6) { background-color: #E8F8F5; border-color: #A3E4D7; } /* ถ่ายรูป - เขียวมินต์ */
+
+        /* --- Video Slider Styles --- */
+        .video-slider-container {
+            grid-column: 1 / -1; /* ให้ slider ขยายเต็มความกว้างกริด */
+            width: 100%;
+            margin-top: 20px;
+        }
+        .video-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 20px;
+            padding: 10px 5px 25px 5px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) transparent;
+        }
+        .video-slider::-webkit-scrollbar { height: 8px; }
+        .video-slider::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 10px; }
+        
+        .video-item {
+            flex: 0 0 350px; /* ขนาดความกว้างของแต่ละคลิป */
+            scroll-snap-align: start;
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        @media (max-width: 768px) { .video-item { flex: 0 0 85%; } }
+
+        /* --- Project Highlight Styles --- */
+        .project-highlight {
+            display: flex;
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s ease;
+            margin-top: 30px;
+        }
+        .project-highlight:hover { transform: translateY(-5px); }
+        .highlight-img { flex: 1.2; min-height: 350px; }
+        .highlight-img img { width: 100%; height: 100%; object-fit: cover; }
+        .highlight-info { flex: 1; padding: 50px; display: flex; flex-direction: column; justify-content: center; }
+        .highlight-info h3 { font-size: 2rem; color: var(--primary-color); margin-bottom: 15px; }
+        .highlight-info p { font-size: 1.2rem; line-height: 1.8; color: var(--text-light); }
+
+        @media (max-width: 992px) {
+            .project-highlight { flex-direction: column; }
+            .highlight-img { min-height: 250px; }
+            .highlight-info { padding: 30px; }
+        }
+
+        /* --- Lightbox Styles --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            cursor: default;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .lightbox.active img {
+            transform: scale(1);
+        }
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+        }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            padding: 20px;
+            transition: 0.3s;
+            z-index: 3001;
+        }
+        .lightbox-nav:hover {
+            color: var(--primary-color);
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+        .prev-btn { left: 10px; }
+        .next-btn { right: 10px; }
+
+        @media (max-width: 768px) {
+            .lightbox-nav { font-size: 30px; padding: 10px; }
+        }
+
+        @media (max-width: 850px) {
+            .resume-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">MyPortfolio.</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#portfolio">Work</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <h1 class="reveal">Hello, I'm <span style="color: var(--primary-color);">TangTang Kawintida Panyachai</span></h1>
+        <div class="typewriter">Computer Graphics & Multimedia Creator</div>
+    </section>
+
+    <section id="about" class="reveal">
+        <h2 class="section-title">About Me</h2>
+        <div style="text-align: center; margin-bottom: 25px;">
+            <img src="9d5bf506-9be4-4721-95b7-c0e8022deeba.jfif" alt="Kawintida Panyachai" class="profile-img">
+        </div>
+        <p style="text-align: left; max-width: 800px; margin: 0 auto; font-size: 1.1rem; color: var(--text-light); line-height: 1.8;">
+            ชื่อตังตัง นางสาว กวินธิดา ปัญญาชัย อายุ 22 ปี ปัจจุบันจบระดับปริญญาตรี มหาวิทยาลัยพะเยา คณะเทคโนโลยีสารสนเทศและการสื่อสาร สาขาคอมพิวเตอร์กราฟิกและมัติมีเดีย มีความสนใจเรื่องการอัพเดพช่าวสารต่างๆ ตัดต่อภาพและวิดีโอ เป็นคนตรงต่อเวลาและสามารถทำงานได้ไม่รู้จักเหนื่อยแล้วพร้อมเก็บประสบการณ์และเรียนรู้สิ่งใหม่ๆ และสามารถปรับตัวเข้าหาคนในทีมได้ดี
+        </p>
+    </section>
+
+    <section id="resume" class="reveal">
+        <h2 class="section-title">My Resume</h2>
+        <div class="resume-grid">
+            <div class="resume-column">
+                <h3>Experience</h3>
+                <div class="resume-entry">
+                    <span class="date">เมษายน 2569 - ปัจจุบัน</span>
+                    <h4>โปรเจกต์วีทูเบอร์ สังกัด นอกทะเล (ชื่อยังไม่เป็นทางการ)</h4>
+                    <p>ตำแหน่ง : Graphic Design and Video Editor<br>หน้าที่หลัก : จัดทำ Thumbnail และตัดคลิป Shorts ตามที่รับมอบหมายเพื่อลงในช่องทาง Social Media ต่างๆของVtuberในโปรเจกต์</p>
+                    <div class="resume-social">
+                        <a href="#" target="_blank" class="social-link">🌐 Project Social</a>
+                    </div>
+                </div>
+                <div class="resume-entry">
+                    <span class="date">3 พ.ย. 2568 - 20 ก.พ. 2569</span>
+                    <h4>บริษัท จีเอ็มเอ็ม แกรมมี่ จำกัด (มหาชน)</h4>
+                    <p>ฝึกงานตำแหน่ง : Graphic Design and Music Creators<br>หน้าที่หลัก : จัด Playlist และทำ Content ให้กับ Social Media ของหน่วยงาน,
+                        ตัดคลิปShorts คิดชื่อคลิป Playlist ลงช่องYouTubeของหน่วยงาน</p>
+                    <div class="resume-social">
+                        <a href="certificate.pdf" target="_blank" class="social-link">📄 Certificate (PDF)</a>
+                    </div>
+                </div>
+                <div class="resume-entry">
+                    <span class="date">มกราคม 2568 - ปัจจุบัน</span>
+                    <h4>เพจอินสตาแกรม : Saslothartwork</h4>
+                    <p>หน้าที่หลัก : ทำกราฟิกในโอกาสวันคล้ายวันเกิดของศิลปิน/ดาราที่ชื่นชอบ</p>
+                    <div class="resume-social">
+                        <a href="https://www.instagram.com/saslothartwork/" target="_blank" class="social-link">📸 Instagram: @saslothartwork</a>
+                    </div>
+                </div>
+                <div class="resume-entry">
+                    <span class="date">2567 - กุมภาพันธ์ 2569</span>
+                    <h4>ยูทูบ วีทูเบอร์ช่อง มู๊นมูน | Moonlight Ch.</h4>
+                    <p>ตำแหน่ง : Graphic Design and Editor<br>หน้าที่หลัก : จัดทำ Thumbnail และตัดคลิป Shorts</p>
+                    <div class="resume-social">
+                        <a href="#" target="_blank" class="social-link">📺 Moonlight Ch.</a>
+                    </div>
+                </div>
+                <div class="resume-entry">
+                    <span class="date">2564 - ปัจจุบัน</span>
+                    <h4>แอดมินเพจอินสตาแกรม Umkijoon_support</h4>
+                    <p>หน้าที่หลัก : ทำ Thumbnail อัปเดตข่าวสารต่างๆ และสื่อสารคุยกับลูกเพจหลังบ้าน</p>
+                    <div class="resume-social">
+                        <a href="https://www.instagram.com/umkijoon_support/" target="_blank" class="social-link">📸 Instagram: @umkijoon_support</a>
+                    </div>
+                </div>
+                <div class="resume-entry">
+                    <span class="date">2559 - ปัจจุบัน</span>
+                    <h4>ยูทูบส่วนตัวช่อง SaSaloth's</h4>
+                    <p>ตำแหน่ง : Editor และ Graphic Design<br>หน้าที่หลัก : ส่วนใหญ่ตัดต่อในสิ่งที่ตนเองกำลังสนใจขณะนั้น</p>
+                    <div class="resume-social">
+                        <a href="https://www.youtube.com/@sasloth_satang" target="_blank" class="social-link">📺 SaSaloth's Channel</a>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 40px;">Education</h3>
+                <div class="resume-entry">
+                    <span class="date">พ.ศ 2565 - 2569</span>
+                    <h4>มหาวิทยาลัยพะเยา</h4>
+                    <p>จบการศึกษาระดับปริญญาตรี คณะเทคโนโลยีสารสนเทศและการสื่อสาร<br>สาขาคอมพิวเตอร์กราฟิกและมัลติมีเดีย</p>
+                </div>
+                <div class="resume-entry">
+                    <span class="date">พ.ศ 2562 - 2565</span>
+                    <h4>โรงเรียนลำปางกัลยาณี</h4>
+                    <p>จบระดับมัธยมศึกษาตอนปลาย</p>
+                </div>
+            </div>
+
+            <div class="resume-column">
+                <h3>Skills</h3>
+                <div class="skill-category">Video Editing</div>
+                <div class="skill-list video-group">
+                    <div class="tag-item">Aegisub</div>
+                    <div class="tag-item">CapCut</div>
+                    <div class="tag-item">Premiere Pro</div>
+                </div>
+
+                <div class="skill-category">Design</div>
+                <div class="skill-list design-group">
+                    <div class="tag-item">Photoshop</div>
+                    <div class="tag-item">Illustrator</div>
+                    <div class="tag-item">Procreate</div>
+                    <div class="tag-item">Canva</div>
+                </div>
+
+                <div class="skill-category">AI Tools</div>
+                <div class="skill-list ai-group">
+                    <div class="tag-item">Gemini</div>
+                    <div class="tag-item">ChatGPT</div>
+                    <div class="tag-item">Claude</div>
+                </div>
+
+                <h3>Languages</h3>
+                <div class="lang-list">
+                    <div class="tag-item">ภาษาไทย (Native)</div>
+                    <div class="tag-item">ภาษาอังกฤษ</div>
+                    <div class="tag-item">ภาษาเกาหลี</div>
+                    <div class="tag-item">ภาษามือ</div>
+                </div>
+
+                <h3>Interests</h3>
+                <div class="interest-list">
+                    <div class="tag-item">ดูหนัง/ละคร ไทยและต่างประเทศ</div>
+                    <div class="tag-item">ดูวาไรตี้</div>
+                    <div class="tag-item">ตามข่าวสารบ้านเมือง</div>
+                    <div class="tag-item">เล่นเกม</div>
+                    <div class="tag-item">ฟังเพลงเก่า</div>
+                    <div class="tag-item">ถ่ายรูป</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="reveal">
+        <h2 class="section-title">My Works</h2>
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterSelection('all')">All</button>
+            <button class="filter-btn" onclick="filterSelection('graphic')">Graphic Design</button>
+            <button class="filter-btn" onclick="filterSelection('character')">Character Design</button>
+            <button class="filter-btn" onclick="filterSelection('video')">Video Editing</button>
+        </div>
+
+        <div class="portfolio-grid">
+            <a href="https://www.instagram.com/p/DXZfuAfk582/" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block;">
+                <img src="umjoon.jpg" alt="Happy Umkijoon Day Artwork" class="portfolio-image">
+                <div class="portfolio-info">
+                    <h3>Happy Umkijoon Day</h3>
+                    <p style="color: var(--text-light);">ทำArtworkในโอกาสวันเกิดของศิลปินที่ตนเองที่ชื่นชอบ</p>
+                </div>
+            </a>
+
+            <a href="#" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block;">
+                <img src="jin kyung.jpg" alt="Happy Jin Kyung Day Artwork" class="portfolio-image">
+                <div class="portfolio-info">
+                    <h3>Happy Jin Kyung Day</h3>
+                    <p style="color: var(--text-light);">ทำArtworkในโอกาสวันเกิดของศิลปินที่ตนเองที่ชื่นชอบ</p>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/p/DR184SVE_lr/" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block;">
+                <img src="sungmin_page-0001.jpg" alt="Happy Sung Min Day Artwork" class="portfolio-image">
+                <div class="portfolio-info">
+                    <h3>Happy Sung Min Day</h3>
+                    <p style="color: var(--text-light);">ทำArtworkในโอกาสวันเกิดของศิลปินที่ตนเองที่ชื่นชอบ</p>
+                </div>
+            </a>
+
+            <a href="https://your-work-link2.com" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block;">
+                <img src="https://via.placeholder.com/400x300/A38C7A/FFFFFF?text=Graphic+Design" alt="Project 2" class="portfolio-image">
+                <div class="portfolio-info">
+                    <h3>Brand Identity</h3>
+                    <p>Graphic Design</p>
+                </div>
+            </a>
+
+            <a href="https://your-work-link3.com" target="_blank" class="portfolio-card filter-item character" style="text-decoration: none; color: inherit; display: block;">
+                <img src="https://via.placeholder.com/400x300/E2D7CE/7A756F?text=Chibi+Character" alt="Project 3" class="portfolio-image">
+                <div class="portfolio-info">
+                    <h3>Mascot Design</h3>
+                    <p>Character Design</p>
+                </div>
+            </a>
+            
+            <div class="video-slider-container filter-item video">
+                <div class="video-slider">
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/k0ehbdxSDhs"></iframe></div>
+                        <div class="portfolio-info"><h3>(OVP)The Penthouse | Believer</h3><p>Video Editing & Motion</p></div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/hUwWtJxfr70"></iframe></div>
+                        <div class="portfolio-info"><h3>Video Project 2</h3><p>Video Editing & Motion</p></div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe></div>
+                        <div class="portfolio-info"><h3>Video Project 3</h3><p>Video Editing & Motion</p></div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe></div>
+                        <div class="portfolio-info"><h3>Video Project 4</h3><p>Video Editing & Motion</p></div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe></div>
+                        <div class="portfolio-info"><h3>Video Project 5</h3><p>Video Editing & Motion</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block; grid-column: 1 / -1;">
+                <img src="-SAsaloth- SAsaloth.jpg" alt="Moonlight Ch. Thumbnails" class="portfolio-image">
+                <div class="portfolio-info">
+                    <h3>Thumbnail V-Tuber / Content</h3>
+                    <p style="color: var(--text-light);">ตัวอย่างThumbnailยูทูปช่อง มู๊นมูน | Moonlight Ch.</p>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <section id="projects" class="reveal">
+        <h2 class="section-title">The Big ProJects</h2>
+        <p style="text-align: center; margin-top: -30px; margin-bottom: 40px; color: var(--text-light); font-size: 1.1rem;">UmkijoonThaiFansProject x บ้านเบส UMKIJOON THAILAND</p>
+        
+        <a href="https://x.com/centerpoint_ent/status/1440103482204176389?s=20" target="_blank" class="project-highlight">
+            <div class="highlight-img">
+                <img src="E_X-2OcVEAYZX8M.jfif" alt="Umkijoon Thai Fans Project">
+            </div>
+            <div class="highlight-info">
+                <h3>Umkijoon Thai Fans Project</h3>
+                <p>โปรเจกต์พิเศษสนับสนุนศิลปิน (Fan Support Project) ร่วมกับ Centerpoint Entertainment และบ้านเบส UMKIJOON THAILAND เพื่อแสดงความรักและความยินดีในโอกาสสำคัญ</p>
+                <p style="margin-top: 20px; font-size: 1rem; color: var(--accent-color); font-weight: 600;">คลิกเพื่อดูรายละเอียดโปรเจกต์ ↗</p>
+            </div>
+        </a>
+    </section>
+
+    <!-- Lightbox Structure -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox">&times;</span>
+        <span class="lightbox-nav prev-btn" onclick="changeImage(-1, event)">&#10094;</span>
+        <span class="lightbox-nav next-btn" onclick="changeImage(1, event)">&#10095;</span>
+        <img id="lightbox-img" src="" alt="Enlarged Work" onclick="event.stopPropagation()">
+    </div>
+
+    <section id="contact" class="contact reveal">
+        <h2>Let's Work Together</h2>
+        <p style="margin: 20px 0;">พร้อมที่จะสร้างสรรค์โปรเจกต์ใหม่ๆ ไปด้วยกันแล้วหรือยัง?</p>
+        <p>
+            <a href="mailto:your.email@example.com">Email Me</a> | 
+            <a href="https://github.com/yourgithub" target="_blank">GitHub</a> |
+            <a href="#" target="_blank">LinkedIn</a>
+        </p>
+    </section>
+
+    <script>
+        // 1. Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // เรียกใช้ครั้งแรกตอนโหลดหน้าเว็บ
+
+        // 2. Category Filter Logic
+        function filterSelection(c) {
+            var x, i;
+            x = document.getElementsByClassName("filter-item");
+            if (c == "all") c = "";
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none"; // ซ่อนทั้งหมดก่อน
+                if (x[i].className.indexOf(c) > -1) {
+                    x[i].style.display = "block"; // แสดงเฉพาะอันที่ตรงคลาส
+                    // เพิ่มลูกเล่น fade in
+                    x[i].style.animation = "fadeIn 0.5s";
+                }
+            }
+            
+            // เปลี่ยนสีปุ่มที่กด (Active state)
+            var btns = document.getElementsByClassName("filter-btn");
+            for (i = 0; i < btns.length; i++) {
+                btns[i].classList.remove("active");
+            }
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add("active");
+            }
+        }
+        
+        // กำหนดให้แสดง "All" ตั้งแต่เริ่ม
+        filterSelection('all');
+
+        // 3. Lightbox Logic
+        let currentImgIndex = 0;
+        let visibleImages = [];
+
+        function openLightbox(imgElement) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            // เก็บรายการรูปภาพที่แสดงอยู่ในปัจจุบัน (ตาม Filter)
+            visibleImages = Array.from(document.querySelectorAll('.portfolio-card:not(.video)[style*="display: block"] .portfolio-image, .portfolio-card:not(.video)[style=""] .portfolio-image'));
+            currentImgIndex = visibleImages.indexOf(imgElement);
+
+            lightboxImg.src = imgElement.src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // ป้องกันการเลื่อนหน้าจอเบื้องหลัง
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function changeImage(step, event) {
+            event.stopPropagation(); // ไม่ให้ปิด Lightbox เมื่อกดปุ่ม
+            currentImgIndex += step;
+
+            // วนลูปรูปภาพ
+            if (currentImgIndex >= visibleImages.length) currentImgIndex = 0;
+            if (currentImgIndex < 0) currentImgIndex = visibleImages.length - 1;
+
+            const lightboxImg = document.getElementById('lightbox-img');
+            // เพิ่มเอฟเฟกต์การเปลี่ยนรูปเล็กน้อย
+            lightboxImg.style.opacity = '0';
+            setTimeout(() => {
+                lightboxImg.src = visibleImages[currentImgIndex].src;
+                lightboxImg.style.opacity = '1';
+            }, 150);
+        }
+
+        // ผูกเหตุการณ์คลิกกับรูปภาพผลงาน (ยกเว้นวิดีโอ)
+        document.addEventListener('click', function(e) {
+            const card = e.target.closest('.portfolio-card');
+            // ถ้าเป็น Card ผลงาน และไม่ใช่ส่วนของวิดีโอ
+            if (card && !card.classList.contains('video')) {
+                const img = card.querySelector('.portfolio-image');
+                if (img) {
+                    e.preventDefault(); // ป้องกันการไปลิงก์ภายนอก (Instagram/etc.)
+                    openLightbox(img);
+                }
+            }
+        });
+    </script>
+    
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</body>
+</html>
