@@ -173,6 +173,10 @@
         .portfolio-info {
             padding: 20px;
         }
+        .video-item .portfolio-info {
+            background-color: #F9F7F4; /* สีครีมอ่อนๆ เพื่อให้ข้อความดูเด่น */
+            border-top: 1px solid var(--secondary-color);
+        }
         .portfolio-info h3 {
             font-size: 1.2rem;
             margin-bottom: 5px;
@@ -253,6 +257,8 @@
             font-weight: 700;
             border-left: 4px solid var(--primary-color);
             padding-left: 15px;
+            border-bottom: 1px solid var(--secondary-color);
+            padding-bottom: 8px;
         }
         .resume-entry {
             position: relative;
@@ -344,6 +350,7 @@
         .skill-list.video-group .tag-item { background-color: #F8F1EB; border-color: #EADBC8; }
         .skill-list.design-group .tag-item { background-color: #F1F4E9; border-color: #DDE5B6; }
         .skill-list.ai-group .tag-item { background-color: #EEF2F5; border-color: #DBE1E3; }
+        .lang-list .tag-item { background-color: #EBF2F7; border-color: #D3E0EA; } /* สีฟ้าอ่อนสำหรับภาษา */
 
         /* สีพื้นหลังสำหรับหัวข้อ Interests เพื่อสื่อถึงอารมณ์ของแต่ละงานอดิเรก */
         .interest-list .tag-item:nth-child(1) { background-color: #F8E9E9; border-color: #E6CECE; } /* ดูหนัง - ชมพูระเรื่อ */
@@ -352,6 +359,7 @@
         .interest-list .tag-item:nth-child(4) { background-color: #F4ECF7; border-color: #D7BDE2; } /* เล่นเกม - ม่วงอ่อน */
         .interest-list .tag-item:nth-child(5) { background-color: #FDF2E9; border-color: #F5CBA7; } /* ฟังเพลง - ส้มสว่างอ่อน */
         .interest-list .tag-item:nth-child(6) { background-color: #E8F8F5; border-color: #A3E4D7; } /* ถ่ายรูป - เขียวมินต์ */
+        .interest-list .tag-item:nth-child(7) { background-color: #EBF5FB; border-color: #AED6F1; } /* ละครเวที - ฟ้าอ่อน */
 
         /* --- Video Slider Styles --- */
         .video-slider-container {
@@ -604,17 +612,18 @@
                     <div class="tag-item">ภาษาไทย (Native)</div>
                     <div class="tag-item">ภาษาอังกฤษ</div>
                     <div class="tag-item">ภาษาเกาหลี</div>
-                    <div class="tag-item">ภาษามือ</div>
+                    <div class="tag-item">🤟 ภาษามือ</div>
                 </div>
 
                 <h3>Interests</h3>
                 <div class="interest-list">
-                    <div class="tag-item">ดูหนัง/ละคร ไทยและต่างประเทศ</div>
-                    <div class="tag-item">ดูวาไรตี้</div>
-                    <div class="tag-item">ตามข่าวสารบ้านเมือง</div>
-                    <div class="tag-item">เล่นเกม</div>
-                    <div class="tag-item">ฟังเพลงเก่า</div>
-                    <div class="tag-item">ถ่ายรูป</div>
+                    <div class="tag-item">🎬 ดูหนัง/ละคร ไทยและต่างประเทศ</div>
+                    <div class="tag-item">📺 ดูวาไรตี้</div>
+                    <div class="tag-item">📰 ตามข่าวสารบ้านเมือง</div>
+                    <div class="tag-item">🎮 เล่นเกม</div>
+                    <div class="tag-item">📻 ฟังเพลงเก่า</div>
+                    <div class="tag-item">📸 ถ่ายรูป</div>
+                    <div class="tag-item">🎭 ชอบดูละครเวที</div>
                 </div>
             </div>
         </div>
@@ -626,7 +635,7 @@
         <div class="filter-buttons">
             <button class="filter-btn active" onclick="filterSelection('all')">All</button>
             <button class="filter-btn" onclick="filterSelection('graphic')">Graphic Design</button>
-            <button class="filter-btn" onclick="filterSelection('character')">Character Design</button>
+            <button class="filter-btn" onclick="filterSelection('motion')">Motion Graphic</button>
             <button class="filter-btn" onclick="filterSelection('video')">Video Editing</button>
         </div>
 
@@ -655,6 +664,22 @@
                 </div>
             </a>
 
+            <a href="#" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block;">
+                <img src="EP1.jpg" alt="EP1 Thumbnail Graphic" class="portfolio-image">
+                <div class="portfolio-info">
+                    <h3>Free talk 1</h3>
+                    <p style="color: var(--text-light);">ทำThumbnailยูทูปช่องKurumi Maki Ch.</p>
+                </div>
+            </a>
+
+            <a href="#" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block;">
+                <img src="EP2.jpg" alt="EP2 Thumbnail Graphic" class="portfolio-image">
+                <div class="portfolio-info">
+                    <h3>Free talk 2</h3>
+                    <p style="color: var(--text-light);">ทำThumbnailยูทูปช่องKurumi Maki Ch.</p>
+                </div>
+            </a>
+
             <a href="https://your-work-link2.com" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block;">
                 <img src="https://via.placeholder.com/400x300/A38C7A/FFFFFF?text=Graphic+Design" alt="Project 2" class="portfolio-image">
                 <div class="portfolio-info">
@@ -663,14 +688,22 @@
                 </div>
             </a>
 
-            <a href="https://your-work-link3.com" target="_blank" class="portfolio-card filter-item character" style="text-decoration: none; color: inherit; display: block;">
-                <img src="https://via.placeholder.com/400x300/E2D7CE/7A756F?text=Chibi+Character" alt="Project 3" class="portfolio-image">
+            <a href="https://your-work-link3.com" target="_blank" class="portfolio-card filter-item motion" style="text-decoration: none; color: inherit; display: block;">
+                <img src="https://via.placeholder.com/400x300/E2D7CE/7A756F?text=Motion+Graphic" alt="Project 3" class="portfolio-image">
                 <div class="portfolio-info">
-                    <h3>Mascot Design</h3>
-                    <p>Character Design</p>
+                    <h3>Motion Graphic Project</h3>
+                    <p>Motion Graphic</p>
                 </div>
             </a>
             
+            <a href="#" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block; grid-column: 1 / -1;">
+                <img src="-SAsaloth- SAsaloth.jpg" alt="Moonlight Ch. Thumbnails" class="portfolio-image">
+                <div class="portfolio-info">
+                    <h3>Thumbnail V-Tuber / Content</h3>
+                    <p style="color: var(--text-light);">ตัวอย่างThumbnailยูทูปช่อง มู๊นมูน | Moonlight Ch.</p>
+                </div>
+            </a>
+
             <div class="video-slider-container filter-item video">
                 <div class="video-slider">
                     <div class="video-item">
@@ -682,8 +715,8 @@
                         <div class="portfolio-info"><h3>Video Project 2</h3><p>Video Editing & Motion</p></div>
                     </div>
                     <div class="video-item">
-                        <div class="video-container"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe></div>
-                        <div class="portfolio-info"><h3>Video Project 3</h3><p>Video Editing & Motion</p></div>
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/g7m734R0EE4"></iframe></div>
+                        <div class="portfolio-info"><h3>Q&A ใครเอ๋อกันไม่มีหลอก EP.1</h3><p>(ตัดให้ 1 ในวีทูบในโปรเจกต์)</p></div>
                     </div>
                     <div class="video-item">
                         <div class="video-container"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe></div>
@@ -696,22 +729,33 @@
                 </div>
             </div>
 
-            <a href="#" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block; grid-column: 1 / -1;">
-                <img src="-SAsaloth- SAsaloth.jpg" alt="Moonlight Ch. Thumbnails" class="portfolio-image">
-                <div class="portfolio-info">
-                    <h3>Thumbnail V-Tuber / Content</h3>
-                    <p style="color: var(--text-light);">ตัวอย่างThumbnailยูทูปช่อง มู๊นมูน | Moonlight Ch.</p>
+            <div class="video-slider-container filter-item video" style="grid-column: 1 / -1; margin-top: 50px;">
+                <h3 style="font-size: 1.8rem; color: #D4A373; margin-bottom: 20px; text-align: center;">Video Shots</h3>
+                <div class="video-slider">
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/qTjO9BclnbY"></iframe></div>
+                        <div class="portfolio-info">
+                            <h3>หนิ่งๆร้องเพลงครั้งแรก</h3>
+                            <p style="color: var(--text-light); font-size: 0.85rem;">ตัดคลิปสั้นให้1ในวีทูปโปรเจคสังกัด นอกทะเล (ชื่อยังไม่เป็นทางการ)</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/Dc7SIZdjSVg"></iframe></div>
+                        <div class="portfolio-info">
+                            <h3>สรุปอะไรใหญ่หรอค่ะ?</h3>
+                            <p style="color: var(--text-light); font-size: 0.85rem;">ตัดคลิปสั้นให้1ในวีทูปโปรเจคสังกัด นอกทะเล (ชื่อยังไม่เป็นทางการ)</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/oghrX2_LAAk"></iframe></div>
+                        <div class="portfolio-info">
+                            <h3>โปรโหมดดิสของหนิ่งเอ๋อ</h3>
+                            <p style="color: var(--text-light); font-size: 0.85rem;">ตัดคลิปสั้นให้1ในวีทูปโปรเจคสังกัด นอกทะเล (ชื่อยังไม่เป็นทางการ)</p>
+                        </div>
+                    </div>
                 </div>
-            </a>
+            </div>
 
-        </div>
-    </section>
-
-    <section id="projects" class="reveal">
-        <h2 class="section-title">The Big ProJects</h2>
-        <p style="text-align: center; margin-top: -30px; margin-bottom: 40px; color: var(--text-light); font-size: 1.1rem;">UmkijoonThaiFansProject x บ้านเบส UMKIJOON THAILAND</p>
-        
-        <a href="https://x.com/centerpoint_ent/status/1440103482204176389?s=20" target="_blank" class="project-highlight">
             <div class="highlight-img">
                 <img src="E_X-2OcVEAYZX8M.jfif" alt="Umkijoon Thai Fans Project">
             </div>
