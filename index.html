@@ -252,6 +252,15 @@
             transform: translateY(-12px);
             box-shadow: 0 20px 25px -5px rgba(163, 140, 122, 0.15), 0 10px 10px -5px rgba(163, 140, 122, 0.08);
         }
+        /* สไตล์พิเศษสำหรับหมวด Graphic Design ให้มีกรอบคล้าย GMM แต่เป็นโทนสีอุ่น */
+        .portfolio-card.graphic {
+            background-color: #FFF9F5; /* สีส้มครีมอ่อน */
+            border: 1.5px solid #F3E5D8; /* ขอบสีเบจเข้มขึ้นเล็กน้อย */
+        }
+        .portfolio-card.graphic .portfolio-info h3 {
+            color: var(--accent-color); /* ใช้สีส้มทอง */
+            text-shadow: 0 0 8px rgba(212, 163, 115, 0.15);
+        }
         .portfolio-image {
             width: 100%;
             height: 400px; /* ลดความสูงพื้นฐานลงเล็กน้อยเพื่อความสมดุล */
@@ -689,7 +698,7 @@
                 </div>
                 <div class="resume-entry">
                     <span class="date">2567 - กุมภาพันธ์ 2569</span>
-                    <h4>ยูทูบ วีทูเบอร์ช่อง มู๊นมูน | Moonlight Ch.</h4>
+                    <h4>ยูทูบช่อง มู๊นมูน | Moonlight Ch.</h4>
                     <p>ตำแหน่ง : Graphic Design and Editor<br>หน้าที่หลัก : จัดทำ Thumbnail และตัดคลิป Shorts</p>
                     <div class="resume-social">
                         <a href="#" target="_blank" class="social-link">📺 Moonlight Ch.</a>
@@ -740,6 +749,7 @@
                     <div class="tag-item">Illustrator</div>
                     <div class="tag-item">Procreate</div>
                     <div class="tag-item">Canva</div>
+                    <div class="tag-item">Figma</div>
                 </div>
 
                 <div class="skill-category">AI Tools</div>
@@ -754,16 +764,16 @@
                     <div class="tag-item">ภาษาไทย (Native)</div>
                     <div class="tag-item">ภาษาอังกฤษ</div>
                     <div class="tag-item">ภาษาเกาหลี</div>
-                    <div class="tag-item">🤟 ภาษามือ</div>
+                    <div class="tag-item">ภาษามือ</div>
                 </div>
 
                 <h3>Interests</h3>
                 <div class="interest-list">
                     <div class="tag-item">🎬 ดูหนัง/ละคร ไทยและต่างประเทศ</div>
-                    <div class="tag-item">📺 ดูวาไรตี้</div>
+                    <div class="tag-item">📺 ดูวาไรตี้/เกมโชว์</div>
                     <div class="tag-item">📰 ตามข่าวสารบ้านเมือง</div>
                     <div class="tag-item">🎮 เล่นเกม</div>
-                    <div class="tag-item">📻 ฟังเพลงเก่า</div>
+                    <div class="tag-item">📻 ฟังเพลงเก่ายุค90</div>
                     <div class="tag-item">📸 ถ่ายรูป</div>
                     <div class="tag-item">🎭 ชอบดูละครเวที</div>
                 </div>
@@ -796,95 +806,90 @@
                     </div>
                     <div class="video-item">
                         <div class="video-container"><iframe src="https://www.youtube.com/embed/VYMgmDZwQas?si=cAoIQ2iccAYDVVFA"></iframe></div>
-                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3>Playlist 1</h3><p style="color: var(--text-light); font-size: 0.85rem;">คิดชื่อ Playlist และค้นหาเพลงเพื่อเข้ากับตัว Playlist เพื่อให้คนฟังได้อารมณ์</p></div>
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3>รวมเพลง อัสนี วสันต์ ยุค 2000,s สุดฮิต</h3><p style="color: var(--text-light); font-size: 0.85rem;">คิดชื่อ Playlist และค้นหาเพลงเพื่อเข้ากับตัว Playlist เพื่อให้คนฟังได้อารมณ์</p></div>
                     </div>
                     <div class="video-item">
-                        <div class="video-container"><iframe src="https://www.youtube.com/embed/VYMgmDZwQas?si=5icmxujNI9pGDmDj"></iframe></div>
-                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3>Playlist 2</h3><p style="color: var(--text-light); font-size: 0.85rem;">คิดชื่อ Playlist และค้นหาเพลงเพื่อเข้ากับตัว Playlist เพื่อให้คนฟังได้อารมณ์</p></div>
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/hn_pPNhCKzU?start=38"></iframe></div>
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3>รวมเพลง อัสนี วสันต์ ยุค 90,s</h3><p style="color: var(--text-light); font-size: 0.85rem;">คิดชื่อ Playlist และค้นหาเพลงเพื่อเข้ากับตัว Playlist เพื่อให้คนฟังได้อารมณ์</p></div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/aoQDu0sD0d4?start=61"></iframe></div>
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3>LONGPLAY SPECIAL เพลงชิลเพลงดัง ฟังสบายหน้าหนาว</h3><p style="color: var(--text-light); font-size: 0.85rem;">คิดชื่อ Playlist และค้นหาเพลงเพื่อเข้ากับตัว Playlist เพื่อให้คนฟังได้อารมณ์</p></div>
                     </div>
                 </div>
             </div>
 
-            <a href="#" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block;">
-                <img src="Ep2.png" alt="EP2 Thumbnail Graphic" class="portfolio-image">
-                <div class="portfolio-info">
-                    <h3>Free talk 2</h3>
-                    <p style="color: var(--text-light);">ทำThumbnailยูทูปช่องKurumi Maki Ch.</p>
+            <div class="video-slider-container filter-item graphic" style="background-color: #FFF9F5; border-color: #F3E5D8; grid-column: 1 / -1; margin-top: 10px;">
+                <h3 style="font-size: 1.8rem; color: var(--accent-color); margin-bottom: 5px; text-align: center; text-shadow: 0 0 15px rgba(212, 163, 115, 0.2);">Graphic Design Works</h3>
+                <p style="text-align: center; color: var(--text-light); font-size: 0.9rem; margin-bottom: 20px;">รวบรวมผลงานการออกแบบ Thumbnail และ Artwork ต่างๆ</p>
+                <div class="video-slider">
+                    <a href="#" class="video-item" style="text-decoration: none; color: inherit;">
+                        <img src="Ep2.png" alt="Free talk 2" class="portfolio-image" style="height: 200px;">
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Free talk 2</h3><p>ทำThumbnailยูทูปช่องKurumi Maki Ch.</p></div>
+                    </a>
+                    <a href="#" class="video-item" style="text-decoration: none; color: inherit;">
+                        <img src="Ep1.png" alt="Free talk 1" class="portfolio-image" style="height: 200px;">
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Free talk 1</h3><p>ทำThumbnailยูทูปช่องKurumi Maki Ch.</p></div>
+                    </a>
+                    <a href="https://www.instagram.com/p/DXZfuAfk582/" target="_blank" class="video-item" style="text-decoration: none; color: inherit;">
+                        <img src="umjoon.jpg" alt="Happy Umkijoon Day" class="portfolio-image" style="height: 200px;">
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Happy Umkijoon Day</h3><p>ทำArtworkในโอกาสวันเกิดศิลปิน</p></div>
+                    </a>
+                    <a href="#" class="video-item" style="text-decoration: none; color: inherit;">
+                        <img src="jin kyung.jpg" alt="Happy Jin Kyung Day" class="portfolio-image" style="height: 200px;">
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Happy Jin Kyung Day</h3><p>ทำArtworkในโอกาสวันเกิดศิลปิน</p></div>
+                    </a>
+                    <a href="https://www.instagram.com/p/DR184SVE_lr/" target="_blank" class="video-item" style="text-decoration: none; color: inherit;">
+                        <img src="sungmin_page-0001.jpg" alt="Happy Sung Min Day" class="portfolio-image" style="height: 200px;">
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Happy Sung Min Day</h3><p>ทำArtworkในโอกาสวันเกิดศิลปิน</p></div>
+                    </a>
+                    <a href="#" class="video-item" style="text-decoration: none; color: inherit;">
+                        <img src="index/Free talk.jpg" alt="Free Talk Thumbnail" class="portfolio-image" style="height: 200px;">
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Free Talk Thumbnail</h3><p>ออกแบบ Thumbnail สำหรับคลิป Free Talk</p></div>
+                    </a>
+                    <a href="https://www.youtube.com/live/WLczOHtClmM?si=Z8hGPYfUGGa_-Yi1" target="_blank" class="video-item" style="text-decoration: none; color: inherit;">
+                        <img src="valo2.png" alt="Valorant Graphic" class="portfolio-image" style="height: 200px;">
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">(งานกราฟิกเกม Valorant + Mr Zane)</h3><p>Graphic Design / YouTube Content</p></div>
+                    </a>
+                    <a href="#" class="video-item" style="text-decoration: none; color: inherit;">
+                        <img src="-SAsaloth- SAsaloth.png" alt="SAsaloth Artwork" class="portfolio-image" style="height: 200px;">
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">SAsaloth Artwork</h3><p>ผลงาน Artwork ในสไตล์แฟนอาร์ต</p></div>
+                        <img src="-SAsaloth- SAsaloth.png" alt="ตัวอย่างThumbnailยูทูปช่อง มู๊นมูน | Moonlight Ch." class="portfolio-image" style="height: 200px;">
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">ตัวอย่างThumbnailยูทูปช่อง มู๊นมูน | Moonlight Ch.</h3><p>ผลงาน Artwork ในสไตล์แฟนอาร์ต</p></div>
+                    </a>
                 </div>
-            </a>
-
-            <a href="#" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block;">
-                <img src="Ep1.png" alt="EP1 Thumbnail Graphic" class="portfolio-image">
-                <div class="portfolio-info">
-                    <h3>Free talk 1</h3>
-                    <p style="color: var(--text-light);">ทำThumbnailยูทูปช่องKurumi Maki Ch.</p>
-                </div>
-            </a>
-
-            <a href="https://www.instagram.com/p/DXZfuAfk582/" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block;">
-                <img src="umjoon.jpg" alt="Happy Umkijoon Day Artwork" class="portfolio-image">
-                <div class="portfolio-info">
-                    <h3>Happy Umkijoon Day</h3>
-                    <p style="color: var(--text-light);">ทำArtworkในโอกาสวันเกิดของศิลปินที่ตนเองที่ชื่นชอบ</p>
-                </div>
-            </a>
-
-            <a href="#" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block;">
-                <img src="jin kyung.jpg" alt="Happy Jin Kyung Day Artwork" class="portfolio-image">
-                <div class="portfolio-info">
-                    <h3>Happy Jin Kyung Day</h3>
-                    <p style="color: var(--text-light);">ทำArtworkในโอกาสวันเกิดของศิลปินที่ตนเองที่ชื่นชอบ</p>
-                </div>
-            </a>
-
-            <a href="https://www.instagram.com/p/DR184SVE_lr/" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block;">
-                <img src="sungmin_page-0001.jpg" alt="Happy Sung Min Day Artwork" class="portfolio-image">
-                <div class="portfolio-info">
-                    <h3>Happy Sung Min Day</h3>
-                    <p style="color: var(--text-light);">ทำArtworkในโอกาสวันเกิดของศิลปินที่ตนเองที่ชื่นชอบ</p>
-                </div>
-            </a>
-
-            <a href="#" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block;">
-                <img src="index/Free talk.jpg" alt="Free Talk Thumbnail" class="portfolio-image">
-                <div class="portfolio-info">
-                    <h3>Free Talk Thumbnail</h3>
-                    <p style="color: var(--text-light);">ออกแบบ Thumbnail สำหรับคลิป Free Talk</p>
-                </div>
-            </a>
-
-            <a href="https://www.youtube.com/live/WLczOHtClmM?si=Z8hGPYfUGGa_-Yi1" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block;">
-                <img src="valo2.png" alt="Valorant Graphic" class="portfolio-image">
-                <div class="portfolio-info">
-                    <h3>(งานกราฟิกเกม Valorant + สงครามส่งด่วนที่ดังเป็นแสในตอนนั้น ทำให้ช่องยูทูปMr Zane)</h3>
-                    <p style="color: var(--text-light);">Graphic Design / YouTube Content</p>
-                </div>
-            </a>
-
-            <a href="#" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block;">
-                <img src="-SAsaloth- SAsaloth.png" alt="SAsaloth Artwork" class="portfolio-image">
-                <div class="portfolio-info">
-                    <h3>SAsaloth Artwork</h3>
-                    <p style="color: var(--text-light);">ผลงาน Artwork อีกหนึ่งชิ้นในสไตล์แฟนอาร์ต</p>
-                </div>
-            </a>
+            </div>
 
             <div class="video-slider-container filter-item video" style="grid-column: 1 / -1; margin-top: 50px;">
                 <h3 style="font-size: 1.8rem; color: #D4A373; margin-bottom: 5px; text-align: center;">Video And Video Shots</h3>
                 <p style="text-align: center; color: #E2C08D; font-size: 0.9rem; margin-bottom: 20px;">รวมตัวอย่างคลิปที่ตนเองได้ทำมา</p>
                 <div class="video-slider">
                     <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/g7m734R0EE4"></iframe></div>
+                        <div class="portfolio-info">
+                            <h3>Q&A ใครเอ๋อกันไม่มีหลอกEp1</h3>
+                            <p style="color: var(--text-light); font-size: 0.85rem;">ทำให้ช่องยูทูปหนิ่งเอ๋อ🐬 1ในวีทูบโปรเจกต์วีทูเบอร์ สังกัด นอกทะเล (ชื่อยังไม่เป็นทางการ)</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
                         <div class="video-container"><iframe src="https://www.youtube.com/embed/k0ehbdxSDhs"></iframe></div>
                         <div class="portfolio-info">
-                            <h3>Motion Graphic : mystery key game</h3>
-                            <p style="color: var(--text-light); font-size: 0.85rem;">คลิปสั้น Video Shot</p>
+                            <h3>(OVP)The Penthouse | Believer</h3>
+                            <p style="color: var(--text-light); font-size: 0.85rem;">ตัดในแนวOVPหรือแฟนคลับของแต่ขึ้นมาเอง </p>
                         </div>
                     </div>
                     <div class="video-item">
                         <div class="video-container"><iframe src="https://www.youtube.com/embed/hUwWtJxfr70"></iframe></div>
                         <div class="portfolio-info">
-                            <h3>Motion POV : Drama Opening</h3>
-                            <p style="color: var(--text-light); font-size: 0.85rem;">คลิปสั้น Video Shot</p>
+                            <h3>บ้านนี้มีรัก x Runningman 600EP</h3>
+                            <p style="color: var(--text-light); font-size: 0.85rem;">ทำคลิปฉลองครบ600EPรายการ Runningman วาไรตี้ดังประเทศเกาหลี</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/oghrX2_LAAk"></iframe></div>
+                        <div class="portfolio-info">
+                            <h3>โปรโหมดดิสของหนิ่งเอ๋อ</h3>
+                            <p style="color: var(--text-light); font-size: 0.85rem;">ทำให้ช่องยูทูปหนิ่งเอ๋อ🐬 1ในวีทูบโปรเจกต์วีทูเบอร์ สังกัด นอกทะเล (ชื่อยังไม่เป็นทางการ)</p>
                         </div>
                     </div>
                     <div class="video-item">
@@ -904,7 +909,7 @@
                     <div class="video-item">
                         <div class="video-container"><iframe src="https://www.youtube.com/embed/5G6fDHzMoYA"></iframe></div>
                         <div class="portfolio-info">
-                            <h3>โปรโหมดดิสของหนิ่งเอ๋อ</h3>
+                            <h3>ตาๆต้องชื้อแว่นแล้วบ่เน้อออ #ศิริพรอำไพพงษ์ </h3>
                             <p style="color: var(--text-light); font-size: 0.85rem;">คลิปสั้น Video Shot</p>
                         </div>
                     </div>
@@ -1048,7 +1053,7 @@
             const lightboxImg = document.getElementById('lightbox-img');
             
             // เก็บรายการรูปภาพที่แสดงอยู่ในปัจจุบัน (ตาม Filter)
-            visibleImages = Array.from(document.querySelectorAll('.portfolio-card:not(.video)[style*="display: block"] .portfolio-image, .portfolio-card:not(.video)[style=""] .portfolio-image'));
+            visibleImages = Array.from(document.querySelectorAll('.portfolio-image')).filter(img => !img.closest('.filter-item.video') && img.offsetParent !== null);
             currentImgIndex = visibleImages.indexOf(imgElement);
 
             lightboxImg.src = imgElement.src;
@@ -1081,9 +1086,12 @@
 
         // ผูกเหตุการณ์คลิกกับรูปภาพผลงาน (ยกเว้นวิดีโอ)
         document.addEventListener('click', function(e) {
-            const card = e.target.closest('.portfolio-card');
-            // ถ้าเป็น Card ผลงาน และไม่ใช่ส่วนของวิดีโอ
-            if (card && !card.classList.contains('video')) {
+            const card = e.target.closest('.portfolio-card, .video-item');
+            if (!card) return;
+
+            const isVideoSection = card.closest('.filter-item.video');
+            
+            if (card && !isVideoSection) {
                 const img = card.querySelector('.portfolio-image');
                 const href = card.getAttribute('href');
                 
