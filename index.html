@@ -72,16 +72,74 @@
         nav a:hover {
             color: var(--primary-color);
         }
-        /* Optimized Nav for Mobile */
+
+        /* Hamburger Toggle Styles */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
         @media (max-width: 768px) {
             nav { padding: 15px 20px; }
-            nav ul { gap: 12px; }
-            nav .logo { font-size: 1.2rem; }
-            nav a { font-size: 0.8rem; }
-        }
-        @media (max-width: 480px) {
-            nav ul { gap: 8px; }
-            nav a { font-size: 0.75rem; }
+            .hamburger { display: flex; }
+            
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                height: 100vh;
+                background-color: var(--bg-color);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+                transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+                opacity: 0;
+                visibility: hidden;
+                box-shadow: -10px 0 20px rgba(0,0,0,0.05);
+            }
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr); /* บังคับให้แสดง 2 คอลัมน์บนมือถือ */
+                gap: 15px; /* ลดช่องว่างระหว่างการ์ดเพื่อให้ประหยัดพื้นที่หน้าจอ */
+            }
+            nav ul.active { 
+                right: 0; 
+                opacity: 1;
+                visibility: visible;
+            }
+            nav ul li {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.4s ease, transform 0.4s ease;
+            }
+            nav ul.active li {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            nav ul.active li:nth-child(1) { transition-delay: 0.1s; }
+            nav ul.active li:nth-child(2) { transition-delay: 0.15s; }
+            nav ul.active li:nth-child(3) { transition-delay: 0.2s; }
+            nav ul.active li:nth-child(4) { transition-delay: 0.25s; }
+            nav ul.active li:nth-child(5) { transition-delay: 0.3s; }
+            nav ul.active li:nth-child(6) { transition-delay: 0.35s; }
+            
+            nav a { font-size: clamp(1rem, 5vw, 1.2rem); }
+
+            .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
         }
 
         /* --- Hero Section --- */
@@ -119,7 +177,19 @@
 
         /* --- Global Section Style --- */
         section {
-            padding: 100px 10vw;
+            padding: 80px 10vw;
+        }
+        @media (max-width: 768px) {
+            section {
+                padding: 50px 5vw; /* ลด Padding บนมือถือเพื่อให้เนื้อหากว้างขึ้น */
+            }
+            .section-title { font-size: 2rem; }
+            .resume-entry h4 { font-size: 1.1rem; }
+            .portfolio-info h3 { font-size: 1.1rem; }
+            .portfolio-info { padding: 12px; } /* ลด Padding ภายในเพื่อเพิ่มพื้นที่ให้ข้อความ */
+            .portfolio-info h3 { font-size: 0.95rem; } /* ปรับขนาดหัวข้อผลงานให้เล็กลงเพื่อให้พอดีคอลัมน์ */
+            .portfolio-info p { font-size: 0.8rem; }
+            .typewriter { font-size: clamp(0.9rem, 4.5vw, 1.3rem); letter-spacing: 0.05em; }
         }
         .section-title {
             text-align: center;
@@ -165,28 +235,33 @@
 
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* ปรับให้รองรับจอมือถือเล็กๆ ได้ดีขึ้น */
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* ปรับขนาดขั้นต่ำให้ยืดหยุ่นขึ้น */
             gap: 30px;
         }
         .portfolio-card {
             background: var(--white);
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            will-change: transform; /* ช่วยให้ Browser คำนวณ animation ได้ลื่นขึ้น */
+            /* เพิ่มเงาแบบหลายชั้นเพื่อให้ดูมีมิติสมจริง */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+            will-change: transform, box-shadow;
             cursor: pointer;
         }
         .portfolio-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transform: translateY(-12px);
+            box-shadow: 0 20px 25px -5px rgba(163, 140, 122, 0.15), 0 10px 10px -5px rgba(163, 140, 122, 0.08);
         }
         .portfolio-image {
             width: 100%;
-            height: 450px;
+            height: 400px; /* ลดความสูงพื้นฐานลงเล็กน้อยเพื่อความสมดุล */
             background-color: var(--secondary-color);
             object-fit: cover;
             transition: transform 0.5s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.02); /* เพิ่มเส้นคั่นบางๆ ให้รูปดูคมชัดขึ้น */
+        }
+        @media (max-width: 768px) {
+            .portfolio-image { height: 180px; } /* ปรับความสูงรูปให้สมดุลกับความกว้างของ 2 คอลัมน์ */
         }
         .portfolio-card:hover .portfolio-image {
             transform: scale(1.05);
@@ -205,13 +280,6 @@
         .portfolio-info p {
             font-size: 0.9rem;
             color: var(--text-light);
-        }
-        .motion-caption {
-            color: var(--text-light);
-            opacity: 0.8;
-            font-size: 0.95rem;
-            margin-top: 8px;
-            line-height: 1.5;
         }
 
         /* --- Scroll Reveal Animation --- */
@@ -418,7 +486,7 @@
             background: var(--white);
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.08);
         }
         @media (max-width: 768px) { .video-item { flex: 0 0 85%; } }
 
@@ -428,7 +496,7 @@
             background: var(--white);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
             text-decoration: none;
             color: inherit;
             transition: transform 0.3s ease;
@@ -567,6 +635,11 @@
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </nav>
 
     <section id="home" class="hero">
@@ -654,7 +727,7 @@
 
             <div class="resume-column">
                 <h3>Skills</h3>
-                <div class="skill-category">Video Editing</div>
+                <div class="skill-category">Video Editing And Music Creators</div>
                 <div class="skill-list video-group">
                     <div class="tag-item">Aegisub</div>
                     <div class="tag-item">CapCut</div>
@@ -704,21 +777,41 @@
         <div class="filter-buttons">
             <button class="filter-btn active" onclick="filterSelection('all')">All</button>
             <button class="filter-btn" onclick="filterSelection('graphic')">Graphic Design</button>
-            <button class="filter-btn" onclick="filterSelection('motion')">Motion Graphic</button>
-            <button class="filter-btn" onclick="filterSelection('video')">Video Editing</button>
+            <button class="filter-btn" onclick="filterSelection('video')">Video Editing And Music Creators</button>
         </div>
 
         <div class="portfolio-grid">
-            <a href="#" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block; grid-column: 1 / -1;">
-                <img src="-SAsaloth- SAsaloth.jpg" alt="Moonlight Ch. Thumbnails" class="portfolio-image">
-                <div class="portfolio-info">
-                    <h3>Thumbnail V-Tuber / Content</h3>
-                    <p style="color: var(--text-light);">ตัวอย่างThumbnailยูทูปช่อง มู๊นมูน | Moonlight Ch.</p>
+            <!-- ย้ายส่วน GMM Grammy มาไว้ที่ด้านบนสุดของ Grid -->
+            <div class="video-slider-container filter-item video" style="background-color: #F0F7FF; border-color: #D1E3FF;">
+                <h3 style="font-size: 1.8rem; color: #0047AB; margin-bottom: 5px; text-align: center; text-shadow: 0 0 15px rgba(0, 71, 171, 0.3);">GMM Grammy : Graphic Design and Music Creators work</h3>
+                <p style="text-align: center; color: var(--text-light); font-size: 0.9rem; margin-bottom: 20px;">ตัวอย่างคลิปที่ลงเป็นทางการระหว่างฝึกงานที่บริษัท จีเอ็มเอ็ม แกรมมี่ จำกัด (มหาชน)</p>
+                <div class="video-slider">
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/5dqLnI1JmRo?si=L2Dh4eWkIpLCksr6"></iframe></div>
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: #0047AB; text-shadow: 0 0 10px rgba(0, 71, 171, 0.2);">(เพลงฮิตติดชาร์จตลอดกาล รวมเพลงฮิต 2026)</h3></div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/VXLp3fYrzuw?si=ej6cV2BGYf3Yh6EJ"></iframe></div>
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: #0047AB; text-shadow: 0 0 10px rgba(0, 71, 171, 0.2);">เพลงฮิตร้านเหล้า รวมคนเลวที่รักเธอ 【LONGPLAY】</h3></div>
+                    </div>
                 </div>
-            </a>
+            </div>
+
+            <div class="video-slider-container filter-item video" style="margin-bottom: 30px; background-color: #F0F7FF; border-color: #D1E3FF;">
+                <div class="video-slider">
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/VYMgmDZwQas?si=cAoIQ2iccAYDVVFA"></iframe></div>
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3>Playlist 1</h3><p style="color: var(--text-light); font-size: 0.85rem;">คิดชื่อ Playlist และค้นหาเพลงเพื่อเข้ากับตัว Playlist เพื่อให้คนฟังได้อารมณ์</p></div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/VYMgmDZwQas?si=5icmxujNI9pGDmDj"></iframe></div>
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3>Playlist 2</h3><p style="color: var(--text-light); font-size: 0.85rem;">คิดชื่อ Playlist และค้นหาเพลงเพื่อเข้ากับตัว Playlist เพื่อให้คนฟังได้อารมณ์</p></div>
+                    </div>
+                </div>
+            </div>
 
             <a href="#" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block;">
-                <img src="EP2.jpg" alt="EP2 Thumbnail Graphic" class="portfolio-image">
+                <img src="Ep2.png" alt="EP2 Thumbnail Graphic" class="portfolio-image">
                 <div class="portfolio-info">
                     <h3>Free talk 2</h3>
                     <p style="color: var(--text-light);">ทำThumbnailยูทูปช่องKurumi Maki Ch.</p>
@@ -726,7 +819,7 @@
             </a>
 
             <a href="#" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block;">
-                <img src="EP1.jpg" alt="EP1 Thumbnail Graphic" class="portfolio-image">
+                <img src="Ep1.png" alt="EP1 Thumbnail Graphic" class="portfolio-image">
                 <div class="portfolio-info">
                     <h3>Free talk 1</h3>
                     <p style="color: var(--text-light);">ทำThumbnailยูทูปช่องKurumi Maki Ch.</p>
@@ -757,67 +850,52 @@
                 </div>
             </a>
 
-            <div class="portfolio-card filter-item motion" style="text-decoration: none; color: inherit; display: block;">
-                <div class="video-container" style="height: 220px;">
-                    <iframe src="https://www.youtube.com/embed/k0ehbdxSDhs" title="Motion Graphic : mystery key game"></iframe>
-                </div>
+            <a href="#" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block;">
+                <img src="Free talk.jpg" alt="Free Talk Thumbnail" class="portfolio-image">
                 <div class="portfolio-info">
-                    <h3>Motion Graphic : mystery key game</h3>
-                    <p class="motion-caption">ตัวอย่างหน้าเกม เป็นผลงานวิชา การออกแบบเกมสมัยตอนเรียนปี2 ซึ่งตนเองรับหน้าที่เป็นริกให้องค์ประกอบเคลื่อนไหว</p>
-                </div>
-            </div>
-
-            <a href="#" target="_blank" class="portfolio-card filter-item motion" style="text-decoration: none; color: inherit; display: block;">
-                <img src="https://via.placeholder.com/400x300/E2D7CE/7A756F?text=Motion+POV+Drama" alt="Motion POV Drama Opening" class="portfolio-image">
-                <div class="portfolio-info">
-                    <h3>Motion POV : Drama Opening</h3>
-                    <p class="motion-caption">ทำโมชั่นPov : Drama Opening ในรายวิชาMotion Graphic</p>
+                    <h3>Free Talk Thumbnail</h3>
+                    <p style="color: var(--text-light);">ออกแบบ Thumbnail สำหรับคลิป Free Talk</p>
                 </div>
             </a>
 
-            <a href="#" target="_blank" class="portfolio-card filter-item motion hide-in-all" style="text-decoration: none; color: inherit; display: block;">
-                <img src="https://via.placeholder.com/400x300/F7F3EE/7A756F?text=AE+Behind+the+Scenes" alt="Game UI Capture" class="portfolio-image">
+            <a href="https://www.youtube.com/live/WLczOHtClmM?si=Z8hGPYfUGGa_-Yi1" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block;">
+                <img src="valo2.png" alt="Valorant Graphic" class="portfolio-image">
                 <div class="portfolio-info">
-                    <h3>Game Design Capture</h3>
-                    <p class="motion-caption">เบื้องหลังการทำโดยใช้แอพ adobe after effects</p>
+                    <h3>(งานกราฟิกเกม Valorant + สงครามส่งด่วนที่ดังเป็นแสในตอนนั้น ทำให้ช่องยูทูปMr Zane)</h3>
+                    <p style="color: var(--text-light);">Graphic Design / YouTube Content</p>
                 </div>
             </a>
 
-            <div class="video-slider-container filter-item video">
-                <h3 style="font-size: 1.8rem; color: var(--primary-color); margin-bottom: 20px; text-align: center;">Video Projects</h3>
-                <div class="video-slider">
-                    <div class="video-item">
-                        <div class="video-container"><iframe src="https://www.youtube.com/embed/5dqLnI1JmRo?si=L2Dh4eWkIpLCksr6"></iframe></div>
-                        <div class="portfolio-info"><h3>Video Project 1</h3><p style="color: var(--text-light); font-size: 0.85rem;">ตัวอย่างคลิปที่ลงเป็นทางการระหว่างฝึกงานที่บริษัท จีเอ็มเอ็ม แกรมมี่ จำกัด (มหาชน)</p></div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-container"><iframe src="https://www.youtube.com/embed/VXLp3fYrzuw?si=ej6cV2BGYf3Yh6EJ"></iframe></div>
-                        <div class="portfolio-info"><h3>Video Project 2</h3><p style="color: var(--text-light); font-size: 0.85rem;">ตัวอย่างคลิปที่ลงเป็นทางการระหว่างฝึกงานที่บริษัท จีเอ็มเอ็ม แกรมมี่ จำกัด (มหาชน)</p></div>
-                    </div>
+            <a href="#" target="_blank" class="portfolio-card filter-item graphic" style="text-decoration: none; color: inherit; display: block;">
+                <img src="-SAsaloth- SAsaloth.png" alt="SAsaloth Artwork" class="portfolio-image">
+                <div class="portfolio-info">
+                    <h3>SAsaloth Artwork</h3>
+                    <p style="color: var(--text-light);">ผลงาน Artwork อีกหนึ่งชิ้นในสไตล์แฟนอาร์ต</p>
                 </div>
-            </div>
+            </a>
 
             <div class="video-slider-container filter-item video" style="grid-column: 1 / -1; margin-top: 50px;">
-                <h3 style="font-size: 1.8rem; color: #D4A373; margin-bottom: 20px; text-align: center;">Video Shots</h3>
+                <h3 style="font-size: 1.8rem; color: #D4A373; margin-bottom: 5px; text-align: center;">Video And Video Shots</h3>
+                <p style="text-align: center; color: var(--text-light); font-size: 0.9rem; margin-bottom: 20px;">รวมตัวอย่างคลิปที่ตนเองได้ทำมา</p>
                 <div class="video-slider">
                     <div class="video-item">
                         <div class="video-container"><iframe src="https://www.youtube.com/embed/3bqhz-SHofc"></iframe></div>
                         <div class="portfolio-info">
-                            <h3>Short 1</h3>
+                            <h3>คําว่าฮักมันเฮี่ยถิ่มไส - #มนต์แคนแก่นคูน</h3>
                             <p style="color: var(--text-light); font-size: 0.85rem;">คลิปสั้น Video Shot</p>
                         </div>
                     </div>
                     <div class="video-item">
                         <div class="video-container"><iframe src="https://www.youtube.com/embed/JQCQsLx6un8"></iframe></div>
                         <div class="portfolio-info">
-                            <h3>Short 2</h3>
+                            <h3>10ล้านวิว!! #คองเพิ่ง</h3>
                             <p style="color: var(--text-light); font-size: 0.85rem;">คลิปสั้น Video Shot</p>
                         </div>
                     </div>
                     <div class="video-item">
                         <div class="video-container"><iframe src="https://www.youtube.com/embed/5G6fDHzMoYA"></iframe></div>
                         <div class="portfolio-info">
-                            <h3>Short 3</h3>
+                            <h3>โปรโหมดดิสของหนิ่งเอ๋อ</h3>
                             <p style="color: var(--text-light); font-size: 0.85rem;">คลิปสั้น Video Shot</p>
                         </div>
                     </div>
@@ -901,6 +979,23 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.querySelector('nav ul');
+        const navLinks = document.querySelectorAll('nav ul a');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
         // 2. Category Filter Logic
         function filterSelection(c) {
             var x, i;
@@ -981,8 +1076,11 @@
             // ถ้าเป็น Card ผลงาน และไม่ใช่ส่วนของวิดีโอ
             if (card && !card.classList.contains('video')) {
                 const img = card.querySelector('.portfolio-image');
-                if (img) {
-                    e.preventDefault(); // ป้องกันการไปลิงก์ภายนอก (Instagram/etc.)
+                const href = card.getAttribute('href');
+                
+                // เปิด Lightbox เฉพาะเมื่อไม่มีลิงก์ หรือลิงก์เป็น # เท่านั้น เพื่อให้ลิงก์จริง (เช่น YouTube) ทำงานได้
+                if (img && (!href || href === '#')) {
+                    e.preventDefault();
                     openLightbox(img);
                 }
             }
