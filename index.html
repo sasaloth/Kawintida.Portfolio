@@ -494,11 +494,11 @@
         .video-slider {
             display: flex;
             overflow-x: auto;
-            scroll-snap-type: x mandatory;
             gap: 20px;
             padding: 10px 5px 25px 5px;
             scrollbar-width: thin;
             scrollbar-color: var(--primary-color) var(--secondary-color);
+            scroll-behavior: auto !important; /* ป้องกันการตีกันกับ Auto-scroll JS */
         }
         .video-slider::-webkit-scrollbar { 
             height: 10px; 
@@ -518,11 +518,11 @@
         
         .video-item {
             flex: 0 0 350px; /* ขนาดความกว้างของแต่ละคลิป */
-            scroll-snap-align: start;
             background: var(--white);
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.08);
+            transform: translateZ(0); /* ช่วยให้การเรนเดอร์ iFrame นิ่งขึ้น */
         }
         @media (max-width: 768px) { .video-item { flex: 0 0 85%; } }
 
@@ -833,11 +833,11 @@
                     </div>
                     <div class="video-item">
                         <div class="video-container"><iframe src="https://www.youtube.com/embed/VYMgmDZwQas?si=cAoIQ2iccAYDVVFA"></iframe></div>
-                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3>รวมเพลง อัสนี วสันต์ ยุค 2000,s สุดฮิต</h3><p style="color: var(--text-light); font-size: 0.85rem;">คิดชื่อ Playlist และค้นหาเพลงเพื่อเข้ากับตัว Playlist เพื่อให้คนฟังได้อารมณ์</p></div>
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3>รวมเพลง อัสนี วสันต์ ยุค 90,s สุดฮิต</h3><p style="color: var(--text-light); font-size: 0.85rem;">คิดชื่อ Playlist และค้นหาเพลงเพื่อเข้ากับตัว Playlist เพื่อให้คนฟังได้อารมณ์</p></div>
                     </div>
                     <div class="video-item">
                         <div class="video-container"><iframe src="https://www.youtube.com/embed/hn_pPNhCKzU?start=38"></iframe></div>
-                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3>รวมเพลง อัสนี วสันต์ ยุค 90,s</h3><p style="color: var(--text-light); font-size: 0.85rem;">คิดชื่อ Playlist และค้นหาเพลงเพื่อเข้ากับตัว Playlist เพื่อให้คนฟังได้อารมณ์</p></div>
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3>รวมเพลง อัสนี วสันต์ ยุค 2000,s</h3><p style="color: var(--text-light); font-size: 0.85rem;">คิดชื่อ Playlist และค้นหาเพลงเพื่อเข้ากับตัว Playlist เพื่อให้คนฟังได้อารมณ์</p></div>
                     </div>
                     <div class="video-item">
                         <div class="video-container"><iframe src="https://www.youtube.com/embed/aoQDu0sD0d4?start=61"></iframe></div>
@@ -1136,7 +1136,7 @@
         document.querySelectorAll('.video-slider').forEach(slider => {
             let scrollInterval;
             let scrollAmount = 1; // Pixels to scroll per step
-            let scrollSpeed = 20; // Milliseconds per step (ปรับค่าเพื่อความเร็วที่ต้องการ)
+            let scrollSpeed = 40; // Milliseconds per step (ปรับค่าเพื่อความเร็วที่ต้องการ)
 
             const startScrolling = () => {
                 scrollInterval = setInterval(() => {
