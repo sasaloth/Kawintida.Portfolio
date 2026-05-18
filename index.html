@@ -657,6 +657,44 @@
         @media (max-width: 850px) {
             .resume-grid { grid-template-columns: 1fr; }
         }
+
+        /* --- Download Button Style --- */
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            color: white !important;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(212, 163, 115, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-download:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(212, 163, 115, 0.4);
+        }
+
+        /* เอฟเฟกต์สีทองสว่าง (Gold Glow) เมื่อเลื่อนมาถึงส่วน Resume */
+        #resume.active .btn-download {
+            background: linear-gradient(45deg, #FFD700, #D4A373) !important;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            color: #3E3B38 !important; /* ปรับสีตัวอักษรให้เข้มขึ้นเพื่อให้ตัดกับสีทอง */
+            animation: gold-glow-pulse 1.5s infinite alternate;
+        }
+
+        @keyframes gold-glow-pulse {
+            from {
+                box-shadow: 0 0 10px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
+            }
+            to {
+                box-shadow: 0 0 25px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.4);
+            }
+        }
     </style>
 </head>
 <body>
@@ -681,6 +719,12 @@
     <section id="home" class="hero">
         <h1 class="reveal">Hello, I'm <span style="color: var(--primary-color);">TangTang Kawintida Panyachai</span></h1>
         <div class="typewriter">Computer Graphics & Multimedia Creator</div>
+        <!-- เพิ่มปุ่ม Download ในหน้า Hero -->
+        <div class="reveal" style="margin-top: 35px;">
+            <a href="resume.pdf" download class="btn-download">
+                <span>📥 Download Resume (PDF)</span>
+            </a>
+        </div>
     </section>
 
     <section id="about" class="reveal">
@@ -689,12 +733,19 @@
             <img src="9d5bf506-9be4-4721-95b7-c0e8022deeba.jfif" alt="Kawintida Panyachai" class="profile-img">
         </div>
         <p style="text-align: left; max-width: 800px; margin: 0 auto; font-size: 1.1rem; color: var(--text-light); line-height: 1.8;">
-            ชื่อตังตัง นางสาว กวินธิดา ปัญญาชัย อายุ 22 ปี ปัจจุบันจบระดับปริญญาตรี มหาวิทยาลัยพะเยา คณะเทคโนโลยีสารสนเทศและการสื่อสาร สาขาคอมพิวเตอร์กราฟิกและมัติมีเดีย มีความสนใจเรื่องการอัพเดพช่าวสารต่างๆ ตัดต่อภาพและวิดีโอ เป็นคนตรงต่อเวลาและสามารถทำงานได้ไม่รู้จักเหนื่อยแล้วพร้อมเก็บประสบการณ์และเรียนรู้สิ่งใหม่ๆ และสามารถปรับตัวเข้าหาคนในทีมได้ดี
+            ชื่อ นางสาว กวินธิดา ปัญญาชัย อายุ 22 ปี เกิด 5 พฤศจิกายน 2546 ปัจจุบันจบระดับปริญญาตรี มหาวิทยาลัยพะเยา คณะเทคโนโลยีสารสนเทศและการสื่อสาร สาขาคอมพิวเตอร์กราฟิกและมัลติมีเดีย มีความสนใจเรื่องการอัพเดตข่าวสารต่างๆ ตัดต่อภาพและวิดีโอ เป็นคนตรงต่อเวลาและสามารถทำงานได้ไม่รู้จักเหนื่อยและพร้อมเก็บประสบการณ์และเรียนรู้สิ่งใหม่ๆ และสามารถปรับตัวเข้าหาคนในทีมได้ดี<br><br>
+            <strong>MBTI:</strong> INFP | <strong>Email:</strong> kawintida323@gmail.com | <strong>Phone:</strong> 0615139372
         </p>
     </section>
 
     <section id="resume" class="reveal">
         <h2 class="section-title">My Resume</h2>
+        <!-- เพิ่มปุ่ม Download ในหน้า Resume -->
+        <div style="text-align: center; margin-top: -30px; margin-bottom: 50px;">
+            <a href="resume.pdf" download class="btn-download">
+                <span>📄 Download Full CV / Resume</span>
+            </a>
+        </div>
         <div class="resume-grid">
             <div class="resume-column">
                 <h3>Experience</h3>
@@ -971,9 +1022,8 @@
         <h2>Let's Work Together</h2>
         <p style="margin: 20px 0;">พร้อมที่จะสร้างสรรค์โปรเจกต์ใหม่ๆ ไปด้วยกันแล้วหรือยัง?</p>
         <p>
-            <a href="mailto:your.email@example.com">Email Me</a> | 
-            <a href="https://github.com/yourgithub" target="_blank">GitHub</a> |
-            <a href="#" target="_blank">LinkedIn</a>
+            <a href="kawintida323@gmail.com">Email Me</a> | 
+            <a href="https://www.linkedin.com/in/kawintida-panyachai-5b380b3a1" target="_blank">LinkedIn</a>
         </p>
     </section>
 
