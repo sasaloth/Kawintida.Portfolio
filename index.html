@@ -348,18 +348,18 @@
 
         /* --- About Section Styles --- */
         .profile-img {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
+            width: 220px;
+            height: 300px;
+            border-radius: 8px;
             object-fit: cover;
-            border: 3px solid var(--secondary-color);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            opacity: 0.95;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 8px 25px rgba(163, 140, 122, 0.3);
+            opacity: 1;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .profile-img:hover {
-            transform: scale(1.1) translateY(-10px);
-            box-shadow: 0 15px 30px rgba(163, 140, 122, 0.2);
+            transform: scale(1.02) translateY(-5px);
+            box-shadow: 0 15px 40px rgba(163, 140, 122, 0.4);
             opacity: 1;
         }
 
@@ -539,11 +539,11 @@
             margin-top: 30px;
         }
         .project-highlight:hover { transform: translateY(-5px); }
-        .highlight-img { flex: 1.2; min-height: 350px; }
+        .highlight-img { flex: 0.7; min-height: 280px; }
         .highlight-img img { width: 100%; height: 100%; object-fit: cover; }
-        .highlight-info { flex: 1; padding: 50px; display: flex; flex-direction: column; justify-content: center; }
-        .highlight-info h3 { font-size: 2rem; color: var(--primary-color); margin-bottom: 15px; }
-        .highlight-info p { font-size: 1.2rem; line-height: 1.8; color: var(--text-light); }
+        .highlight-info { flex: 1; padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+        .highlight-info h3 { font-size: 1.8rem; color: var(--primary-color); margin-bottom: 15px; }
+        .highlight-info p { font-size: 1.1rem; line-height: 1.8; color: var(--text-light); }
 
         @media (max-width: 992px) {
             .project-highlight { flex-direction: column; }
@@ -729,13 +729,21 @@
 
     <section id="about" class="reveal">
         <h2 class="section-title">About Me</h2>
-        <div style="text-align: center; margin-bottom: 25px;">
-            <img src="9d5bf506-9be4-4721-95b7-c0e8022deeba.jfif" alt="Kawintida Panyachai" class="profile-img">
+        <div class="project-highlight" style="margin-top: 40px;">
+            <div class="highlight-img">
+                <img src="Tangtang.jpg" alt="Kawintida Panyachai">
+            </div>
+            <div class="highlight-info">
+                <h3 style="font-size: 1.8rem;">Kawintida Panyachai</h3>
+                <p style="font-size: 1rem; margin: 10px 0;">นางสาว กวินธิดา ปัญญาชัย</p>
+                <p style="font-size: 0.95rem; color: var(--text-light); margin-top: 20px; line-height: 1.8;">
+                    อายุ 22 ปี เกิด 5 พฤศจิกายน 2546 ปัจจุบันจบระดับปริญญาตรี มหาวิทยาลัยพะเยา คณะเทคโนโลยีสารสนเทศและการสื่อสาร สาขาคอมพิวเตอร์กราฟิกและมัลติมีเดีย มีความสนใจเรื่องการอัพเดตข่าวสารต่างๆ ตัดต่อภาพและวิดีโอ เป็นคนตรงต่อเวลาและสามารถทำงานได้ไม่รู้จักเหนื่อยและพร้อมเก็บประสบการณ์และเรียนรู้สิ่งใหม่ๆ และสามารถปรับตัวเข้าหาคนในทีมได้ดี
+                </p>
+                <p style="font-size: 0.9rem; margin-top: 15px;"><strong>MBTI:</strong> INFP</p>
+                <p style="font-size: 0.9rem; margin-top: 8px;"><strong>Email:</strong> kawintida323@gmail.com</p>
+                <p style="font-size: 0.9rem; margin-top: 8px;"><strong>Phone:</strong> 0615139372</p>
+            </div>
         </div>
-        <p style="text-align: left; max-width: 800px; margin: 0 auto; font-size: 1.1rem; color: var(--text-light); line-height: 1.8;">
-            ชื่อ นางสาว กวินธิดา ปัญญาชัย อายุ 22 ปี เกิด 5 พฤศจิกายน 2546 ปัจจุบันจบระดับปริญญาตรี มหาวิทยาลัยพะเยา คณะเทคโนโลยีสารสนเทศและการสื่อสาร สาขาคอมพิวเตอร์กราฟิกและมัลติมีเดีย มีความสนใจเรื่องการอัพเดตข่าวสารต่างๆ ตัดต่อภาพและวิดีโอ เป็นคนตรงต่อเวลาและสามารถทำงานได้ไม่รู้จักเหนื่อยและพร้อมเก็บประสบการณ์และเรียนรู้สิ่งใหม่ๆ และสามารถปรับตัวเข้าหาคนในทีมได้ดี<br><br>
-            <strong>MBTI:</strong> INFP | <strong>Email:</strong> kawintida323@gmail.com | <strong>Phone:</strong> 0615139372
-        </p>
     </section>
 
     <section id="resume" class="reveal">
