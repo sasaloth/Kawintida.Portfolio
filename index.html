@@ -526,6 +526,89 @@
         }
         @media (max-width: 768px) { .video-item { flex: 0 0 85%; } }
 
+        .project-case {
+            background: rgba(255,255,255,0.8);
+            border: 1px solid rgba(163, 140, 122, 0.12);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 12px 25px rgba(54, 44, 36, 0.05);
+        }
+        .case-label {
+            display: inline-block;
+            background: rgba(163, 140, 122, 0.12);
+            color: var(--primary-color);
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 0.74rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .project-case h3 {
+            margin: 0;
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            color: #0047AB;
+            text-align: left;
+        }
+        .case-subtitle {
+            margin: 8px 0 18px;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+        .case-block {
+            background: #f9f5f1;
+            border: 1px solid rgba(163, 140, 122, 0.08);
+            border-radius: 16px;
+            padding: 18px 16px;
+        }
+        .case-block h4 {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            margin: 0 0 10px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .case-block p,
+        .case-block li {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+        .case-block ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        .case-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .case-tools span {
+            background: var(--white);
+            border: 1px solid var(--secondary-color);
+            border-radius: 999px;
+            padding: 7px 12px;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        @media (max-width: 768px) {
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
+            .project-case {
+                padding: 18px 16px;
+            }
+        }
+
         /* --- Project Highlight Styles --- */
         .project-highlight {
             display: flex;
@@ -717,8 +800,9 @@
     </nav>
 
     <section id="home" class="hero">
-        <h1 class="reveal">Hello, I'm <span style="color: var(--primary-color);">TangTang Kawintida Panyachai</span></h1>
-        <div class="typewriter">graphic design & editor</div>
+        <h1 class="reveal">Hello, I'm <span style="color: #000000;">TangTang</span> <span style="color: var(--primary-color);">Kawintida Panyachai</span></h1>
+        <div class="reveal" style="font-size: 1.5rem; color: var(--text-light); margin-top: 10px;">Graphic Designer & Video Editor</div>
+        <div class="reveal" style="font-size: 1.1rem; color: var(--text-light); margin-top: 8px;">Creating visuals, content & digital experiences.</div>
         <!-- เพิ่มปุ่ม Download ในหน้า Hero -->
         <div class="reveal" style="margin-top: 35px;">
             <a href="resume.pdf" download="กวินธิดา ปัญญาชัย Resume.pdf" class="btn-download">
@@ -759,10 +843,12 @@
                 <h3>Experience</h3>
                 <div class="resume-entry">
                     <span class="date">เมษายน 2569 - ปัจจุบัน</span>
-                    <h4>โปรเจกต์วีทูเบอร์ สังกัด นอกทะเล (ชื่อยังไม่เป็นทางการ)</h4>
+                    <h4>โปรเจกต์วีทูเบอร์ สังกัด นอกทะเล </h4>
+                      <h4>โดยทำหน้าที่หลักให้กับช่อง @ninger_หนิ่งเอ๋อ </h4>
                     <p>ตำแหน่ง : Graphic Design and Video Editor<br>หน้าที่หลัก : จัดทำ Thumbnail และตัดคลิป Shorts ตามที่รับมอบหมายเพื่อลงในช่องทาง Social Media ต่างๆของVtuberในโปรเจกต์</p>
                     <div class="resume-social">
-                        <a href="#" target="_blank" class="social-link">🌐 Project Social</a>
+                        <a href="https://www.youtube.com/@ninger_%E0%B8%AB%E0%B8%99%E0%B8%B4%E0%B9%88%E0%B8%87%E0%B9%80%E0%B8%AD%E0%B9%8B%E0%B8%AD" target="_blank" rel="noopener noreferrer" class="social-link">🌐 Project Social</a>
+                        <a href="https://www.youtube.com/shorts/oghrX2_LAAk" target="_blank" rel="noopener noreferrer" class="social-link">🎬 Sample Clip</a>
                     </div>
                 </div>
                 <div class="resume-entry">
@@ -868,15 +954,45 @@
         <h2 class="section-title">My Works</h2>
         
         <div class="filter-buttons">
-            <button class="filter-btn active" onclick="filterSelection('all')">All</button>
+            <button class="filter-btn active" onclick="filterSelection('big-projects')">The Big Projects</button>
+            <button class="filter-btn" onclick="filterSelection('internship')">Internship</button>
             <button class="filter-btn" onclick="filterSelection('graphic')">Graphic Design</button>
-            <button class="filter-btn" onclick="filterSelection('video')">Video Editing And Music Creators</button>
+            <button class="filter-btn" onclick="filterSelection('editor')">Editor</button>
         </div>
 
         <div class="portfolio-grid">
             <!-- ย้ายส่วน GMM Grammy มาไว้ที่ด้านบนสุดของ Grid -->
-            <div class="video-slider-container filter-item video" style="background-color: #F0F7FF; border-color: #D1E3FF;">
-                <h3 style="font-size: 1.8rem; color: #0047AB; margin-bottom: 5px; text-align: center; text-shadow: 0 0 15px rgba(0, 71, 171, 0.3);">GMM Grammy : Graphic Design and Music Creators work</h3>
+            <div class="video-slider-container filter-item video" data-filter="internship" style="background-color: #F0F7FF; border-color: #D1E3FF;">
+                <div class="project-case">
+                    <div class="case-label">Featured Project</div>
+                    <h3>GMM Grammy</h3>
+                    <p class="case-subtitle">Graphic Design &amp; Music Content</p>
+
+                    <div class="case-grid">
+                        <div class="case-block">
+                            <h4>Role</h4>
+                            <p>Graphic Designer / Content Creator จัด Playlist และทำ Content ให้กับ Social Media ของหน่วยงาน, ตัดคลิปShorts คิดชื่อคลิป Playlist ลงช่องYouTubeของหน่วยงาน</p>
+                        </div>
+                        <div class="case-block">
+                            <h4>What I Did</h4>
+                            <ul>
+                                <li>Playlist Curation</li>
+                                <li>YouTube Content</li>
+                                <li>Shorts Editing</li>
+                                <li>Thumbnail / Graphic Design</li>
+                            </ul>
+                        </div>
+                        <div class="case-block">
+                            <h4>Tools</h4>
+                            <div class="case-tools">
+                                <span>Photoshop</span>
+                                <span>Premiere Pro</span>
+                                <span>CapCut</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <p style="text-align: center; color: var(--text-light); font-size: 0.9rem; margin-bottom: 20px;">ตัวอย่างคลิปที่ลงเป็นทางการระหว่างฝึกงานที่บริษัท จีเอ็มเอ็ม แกรมมี่ จำกัด (มหาชน)</p>
                 <div class="video-slider">
                     <div class="video-item">
@@ -902,8 +1018,54 @@
                 </div>
             </div>
 
-            <div class="video-slider-container filter-item graphic" style="background-color: #FFF9F5; border-color: #F3E5D8; grid-column: 1 / -1; margin-top: 10px;">
-                <h3 style="font-size: 1.8rem; color: var(--accent-color); margin-bottom: 5px; text-align: center; text-shadow: 0 0 15px rgba(212, 163, 115, 0.2);">Graphic Design Works</h3>
+            <div class="video-slider-container filter-item video" data-filter="internship" style="background-color: #F6F4FF; border-color: #E4DFFE; grid-column: 1 / -1; margin-top: 10px;">
+                <h3 style="font-size: 1.8rem; color: #5B4B8A; margin-bottom: 5px; text-align: center; text-shadow: 0 0 15px rgba(91, 75, 138, 0.18);">Official GMM Karaoke </h3>
+                <p style="text-align: center; color: var(--text-light); font-size: 0.9rem; margin-bottom: 20px;">คลิปเพลงได้มอบหมายในการทำซับเพลงคาราโอเกะ ลงเป็นทางการระหว่างฝึกงานที่บริษัท จีเอ็มเอ็ม แกรมมี่ จำกัด (มหาชน)</p>
+                <a href="https://www.youtube.com/watch?v=cpNA1zRM-X0" target="_blank" rel="noopener noreferrer" class="project-highlight" style="text-decoration: none; color: inherit; max-width: 900px; margin: 0 auto; display: flex; align-items: stretch;">
+                    <div class="highlight-img" style="flex: 0.8; min-height: 260px; position: relative;">
+                        <img src="รูปนางฟ้ากลับสวรรค์.jpg" alt="นางฟ้ากลับสวรรค์" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="Screenshot 2026-03-05 204034.png" alt="Process screenshot" style="position: absolute; right: 12px; bottom: 12px; width: 120px; height: auto; border-radius: 12px; border: 3px solid rgba(255,255,255,0.9); box-shadow: 0 8px 20px rgba(0,0,0,0.15); object-fit: cover; background: #fff;">
+                    </div>
+                    <div class="highlight-info" style="flex: 1; padding: 26px 30px;">
+                        <h3 style="font-size: 1.8rem; margin-bottom: 10px;">เพลงนางฟ้ากลับสวรรค์ - ตรี ชัยณรงค์</h3>
+                        <p style="font-size: 1rem; color: var(--text-light); line-height: 1.8;">ผลงานที่ใช้Premiere Proในการทำซับเพลงคาราโอเกะโดยที่จับจังหวะให้ตรงกับเสียงนักร้อง</p>
+                        <p style="margin-top: 18px; font-size: 1rem; color: var(--accent-color); font-weight: 600;">คลิกเพื่อเปิดคลิปใน YouTube ↗</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="video-slider-container filter-item graphic" data-filter="graphic" style="background-color: #FFF9F5; border-color: #F3E5D8; grid-column: 1 / -1; margin-top: 10px;">
+                <div class="project-case">
+                    <div class="case-label">Selected Works</div>
+                    <h3 style="color: var(--accent-color);">Graphic Design Works</h3>
+                    <p class="case-subtitle">Thumbnail, Artwork &amp; Visual Content</p>
+
+                    <div class="case-grid">
+                        <div class="case-block">
+                            <h4>Role</h4>
+                            <p>Graphic Designer / Visual Content Creator</p>
+                        </div>
+                        <div class="case-block">
+                            <h4>What I Did</h4>
+                            <ul>
+                                <li>YouTube Thumbnail</li>
+                                <li>Fan Art / Birthday Artwork</li>
+                                <li>Social Media Visuals</li>
+                                <li>Content Design</li>
+                            </ul>
+                        </div>
+                        <div class="case-block">
+                            <h4>Tools</h4>
+                            <div class="case-tools">
+                                <span>Photoshop</span>
+                                <span>Illustrator</span>
+                                <span>Procreate</span>
+                                <span>Canva</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <p style="text-align: center; color: var(--text-light); font-size: 0.9rem; margin-bottom: 20px;">รวบรวมผลงานการออกแบบ Thumbnail และ Artwork ต่างๆ</p>
                 <div class="video-slider">
                     <a href="#" class="video-item" style="text-decoration: none; color: inherit;">
@@ -937,7 +1099,54 @@
                 </div>
             </div>
 
-            <div class="video-slider-container filter-item video" style="grid-column: 1 / -1; margin-top: 50px;">
+            <div class="video-slider-container filter-item video" data-filter="big-projects" style="background-color: #FFF9F3; border-color: #F4DAB3; grid-column: 1 / -1; margin-top: 12px;">
+                <h3 style="font-size: 1.8rem; color: #D4AF37; margin-bottom: 5px; text-align: center;">The Big Projects</h3>
+                <p style="text-align: center; margin-top: 5px; margin-bottom: 20px; color: var(--text-light); font-size: 1rem;">UmkijoonThaiFansProject x บ้านเบส UMKIJOON THAILAND</p>
+                
+                <a href="https://x.com/centerpoint_ent/status/1440103482204176389?s=20" target="_blank" class="project-highlight" style="max-width: 980px; margin: 0 auto;">
+                    <div class="highlight-img">
+                        <img src="E_X-2OcVEAYZX8M.jfif" alt="Umkijoon Thai Fans Project">
+                    </div>
+                    <div class="highlight-info">
+                        <h3>Umkijoon Thai Fans Project</h3>
+                        <p>โปรเจกต์พิเศษสนับสนุนศิลปิน (Fan Support Project) ร่วมกับบ้านเบส UMKIJOON THAILAND เพื่อแสดงความรักและความยินดีในโอกาสสำคัญ ที่Centerpoint Entertainment ในงาน“ด้อมมิดเดิลเอจร่วมใจส่งเมนไปเซ็นเตอร์พ้อยท์” วันที่ 21-23 กันยายน ปี 2564</p>
+                        <p style="font-size: 0.95rem; color: var(--text-light); margin-top: 15px; line-height: 1.8; text-align: justify; letter-spacing: 0.2px;">* รูปที่เห็นเป็นรูปที่รับการคัดเลือกให้เห็นป้ายวันนั้น และ ตนเองทำหน้าที่ประสานงานหลักและเป็น 1 ในคณะกรรมการในโปรโมททำป้ายโปรโมทในงาน“ด้อมมิดเดิลเอจร่วมใจส่งเมนไปเซ็นเตอร์พ้อยท์” ซึ่งเป็นงานที่รวมบ้านแฟนคลับด้อมต่างๆพร้อมใจทำป้ายโปรโมทหรือเนื่องในโอกาสวันสำคัญให้กับศิลปินที่ชอบ</p>
+                        <p style="margin-top: 20px; font-size: 1rem; color: var(--accent-color); font-weight: 600;">คลิกเพื่อดูรายละเอียดโปรเจกต์ ↗</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="video-slider-container filter-item video" data-filter="editor" style="grid-column: 1 / -1; margin-top: 20px;">
+                <div class="project-case">
+                    <div class="case-label">Selected Works</div>
+                    <h3 style="color: var(--accent-color);">Video Editing Works</h3>
+                    <p class="case-subtitle">Video Editing, Short-form Content &amp; Visual Storytelling</p>
+
+                    <div class="case-grid">
+                        <div class="case-block">
+                            <h4>Role</h4>
+                            <p>Video Editor / Content Creator</p>
+                        </div>
+                        <div class="case-block">
+                            <h4>What I Did</h4>
+                            <ul>
+                                <li>Shorts Editing</li>
+                                <li>Video Storytelling</li>
+                                <li>Fan-made Content</li>
+                                <li>Social Media Video</li>
+                            </ul>
+                        </div>
+                        <div class="case-block">
+                            <h4>Tools</h4>
+                            <div class="case-tools">
+                                <span>Premiere Pro</span>
+                                <span>CapCut</span>
+                                <span>Aegisub</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <h3 style="font-size: 1.8rem; color: #D4A373; margin-bottom: 5px; text-align: center;">Video And Video Shots</h3>
                 <p style="text-align: center; color: #E2C08D; font-size: 0.9rem; margin-bottom: 20px;">รวมตัวอย่างคลิปที่ตนเองได้ทำมา</p>
                 <div class="video-slider">
@@ -993,23 +1202,6 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <section id="projects" class="reveal">
-        <h2 class="section-title" style="color: #D4AF37;">The Big Projects</h2>
-        <p style="text-align: center; margin-top: -30px; margin-bottom: 40px; color: var(--text-light); font-size: 1.1rem;">UmkijoonThaiFansProject x บ้านเบส UMKIJOON THAILAND</p>
-        
-        <a href="https://x.com/centerpoint_ent/status/1440103482204176389?s=20" target="_blank" class="project-highlight">
-            <div class="highlight-img">
-                <img src="E_X-2OcVEAYZX8M.jfif" alt="Umkijoon Thai Fans Project">
-            </div>
-            <div class="highlight-info">
-                <h3>Umkijoon Thai Fans Project</h3>
-                <p>โปรเจกต์พิเศษสนับสนุนศิลปิน (Fan Support Project) ร่วมกับบ้านเบส UMKIJOON THAILAND เพื่อแสดงความรักและความยินดีในโอกาสสำคัญ ที่Centerpoint Entertainment ในงาน“ด้อมมิดเดิลเอจร่วมใจส่งเมนไปเซ็นเตอร์พ้อยท์” วันที่ 21-23 กันยายน ปี 2564</p>
-                <p style="font-size: 0.95rem; color: var(--text-light); margin-top: 15px; line-height: 1.8; text-align: justify; letter-spacing: 0.2px;">* รูปที่เห็นเป็นรูปที่รับการคัดเลือกให้เห็นป้ายวันนั้น และ ตนเองทำหน้าที่ประสานงานหลักและเป็น 1 ในคณะกรรมการในโปรโมททำป้ายโปรโมทในงาน“ด้อมมิดเดิลเอจร่วมใจส่งเมนไปเซ็นเตอร์พ้อยท์” ซึ่งเป็นงานที่รวมบ้านแฟนคลับด้อมต่างๆพร้อมใจทำป้ายโปรโมทหรือเนื่องในโอกาสวันสำคัญให้กับศิลปินที่ชอบ</p>
-                <p style="margin-top: 20px; font-size: 1rem; color: var(--accent-color); font-weight: 600;">คลิกเพื่อดูรายละเอียดโปรเจกต์ ↗</p>
-            </div>
-        </a>
     </section>
 
     <!-- Lightbox Structure -->
@@ -1092,18 +1284,10 @@
             x = document.getElementsByClassName("filter-item");
             for (i = 0; i < x.length; i++) {
                 x[i].style.display = "none"; // ซ่อนทั้งหมดก่อน
-                if (c == "all") {
-                    // แสดงเฉพาะรายการที่ไม่มีคลาส hide-in-all
-                    if (x[i].className.indexOf("hide-in-all") == -1) {
-                        x[i].style.display = "block";
-                        x[i].style.animation = "fadeIn 0.5s";
-                    }
-                } else {
-                    if (x[i].className.indexOf(c) > -1) {
-                        x[i].style.display = "block";
-                        // เพิ่มลูกเล่น fade in
-                        x[i].style.animation = "fadeIn 0.5s";
-                    }
+                var itemFilter = x[i].getAttribute("data-filter");
+                if (itemFilter === c) {
+                    x[i].style.display = "block";
+                    x[i].style.animation = "fadeIn 0.5s";
                 }
             }
             
@@ -1117,8 +1301,8 @@
             }
         }
         
-        // กำหนดให้แสดง "All" ตั้งแต่เริ่ม
-        filterSelection('all');
+        // กำหนดให้แสดง "The Big Projects" ตั้งแต่เริ่ม
+        filterSelection('big-projects');
 
         // 3. Lightbox Logic
         let currentImgIndex = 0;
