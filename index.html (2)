@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kawintida Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Color Palette (Earth Tone / Minimal) --- */
+        :root {
+            --bg-color: #FDFBF7;
+            --text-dark: #3E3B38;
+            --text-light: #7A756F;
+            --primary-color: #A38C7A;
+            --secondary-color: #E2D7CE;
+            --white: #FFFFFF;
+            --accent-color: #D4A373;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(253, 251, 247, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            transition: all 0.3s ease; /* เพิ่ม transition เพื่อความนุ่มนวล */
+        }
+        nav.scrolled {
+            padding: 12px 50px; /* ลดความสูงของเมนูเมื่อเลื่อนลง */
+            background-color: rgba(253, 251, 247, 0.98);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        nav.scrolled a {
+            color: #1A1817; /* เปลี่ยนเป็นสีน้ำตาลที่เข้มขึ้นเมื่อเลื่อนลงมา */
+        }
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hamburger Toggle Styles */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 15px 20px; }
+            nav .logo { font-size: 1.2rem; }
+            .hamburger { display: flex; }
+            
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                height: 100vh;
+                background-color: var(--bg-color);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+                transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+                opacity: 0;
+                visibility: hidden;
+                box-shadow: -10px 0 20px rgba(0,0,0,0.05);
+            }
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr); /* บังคับให้แสดง 2 คอลัมน์บนมือถือ */
+                gap: 15px; /* ลดช่องว่างระหว่างการ์ดเพื่อให้ประหยัดพื้นที่หน้าจอ */
+            }
+            nav ul.active { 
+                right: 0; 
+                opacity: 1;
+                visibility: visible;
+            }
+            nav ul li {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.4s ease, transform 0.4s ease;
+            }
+            nav ul.active li {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            nav ul.active li:nth-child(1) { transition-delay: 0.1s; }
+            nav ul.active li:nth-child(2) { transition-delay: 0.15s; }
+            nav ul.active li:nth-child(3) { transition-delay: 0.2s; }
+            nav ul.active li:nth-child(4) { transition-delay: 0.25s; }
+            nav ul.active li:nth-child(5) { transition-delay: 0.3s; }
+            nav ul.active li:nth-child(6) { transition-delay: 0.35s; }
+            
+            nav a { font-size: clamp(1rem, 5vw, 1.2rem); }
+
+            .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 8vw, 3.5rem); /* ปรับขนาดอัตโนมัติตามหน้าจอ */
+            margin-bottom: 10px;
+        }
+        .typewriter {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            overflow: hidden;
+            border-right: .15em solid var(--primary-color);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-color); }
+        }
+
+        /* --- Global Section Style --- */
+        section {
+            padding: 80px 10vw;
+        }
+        @media (max-width: 768px) {
+            section {
+                padding: 50px 5vw; /* ลด Padding บนมือถือเพื่อให้เนื้อหากว้างขึ้น */
+            }
+            .section-title { font-size: 2rem; }
+            .resume-entry h4 { font-size: 1.1rem; }
+            .portfolio-info h3 { font-size: 1.1rem; }
+            .portfolio-info { padding: 12px; } /* ลด Padding ภายในเพื่อเพิ่มพื้นที่ให้ข้อความ */
+            .portfolio-info h3 { font-size: 0.95rem; } /* ปรับขนาดหัวข้อผลงานให้เล็กลงเพื่อให้พอดีคอลัมน์ */
+            .portfolio-info p { font-size: 0.8rem; }
+            .resume-column h3 { text-align: center; border-left: none; padding-left: 0; margin-top: 30px; }
+            .skill-category { text-align: center; font-size: 0.85rem; }
+            .skill-list, .lang-list, .interest-list { justify-content: center; gap: 8px; }
+            .tag-item { font-size: 0.9rem; padding: 6px 15px; }
+            .typewriter { font-size: clamp(0.9rem, 4.5vw, 1.3rem); letter-spacing: 0.05em; }
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* --- Portfolio Section --- */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 8px 20px;
+            border: 1px solid var(--secondary-color);
+            background: transparent;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Prompt', sans-serif;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* ปรับขนาดขั้นต่ำให้ยืดหยุ่นขึ้น */
+            gap: 30px;
+        }
+        .portfolio-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            /* เพิ่มเงาแบบหลายชั้นเพื่อให้ดูมีมิติสมจริง */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+            will-change: transform, box-shadow;
+            cursor: pointer;
+        }
+        .portfolio-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 25px -5px rgba(163, 140, 122, 0.15), 0 10px 10px -5px rgba(163, 140, 122, 0.08);
+        }
+        /* สไตล์พิเศษสำหรับหมวด Graphic Design ให้มีกรอบคล้าย GMM แต่เป็นโทนสีอุ่น */
+        .portfolio-card.graphic {
+            background-color: #FFF9F5; /* สีส้มครีมอ่อน */
+            border: 1.5px solid #F3E5D8; /* ขอบสีเบจเข้มขึ้นเล็กน้อย */
+        }
+        .portfolio-card.graphic .portfolio-info h3 {
+            color: var(--accent-color); /* ใช้สีส้มทอง */
+            text-shadow: 0 0 8px rgba(212, 163, 115, 0.15);
+        }
+        /* Ensure consistent height for all graphic images in the slider */
+        .video-slider-container.graphic .portfolio-image {
+            height: 200px;
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 400px; /* ลดความสูงพื้นฐานลงเล็กน้อยเพื่อความสมดุล */
+            background-color: var(--secondary-color);
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.02); /* เพิ่มเส้นคั่นบางๆ ให้รูปดูคมชัดขึ้น */
+        }
+        @media (max-width: 768px) {
+            .portfolio-image { height: 180px; } /* ปรับความสูงรูปให้สมดุลกับความกว้างของ 2 คอลัมน์ */
+        }
+        .portfolio-card:hover .portfolio-image {
+            transform: scale(1.05);
+        }
+        .portfolio-info {
+            padding: 20px;
+        }
+        .video-item .portfolio-info {
+            background-color: #F9F7F4; /* สีครีมอ่อนๆ เพื่อให้ข้อความดูเด่น */
+            border-top: 1px solid var(--secondary-color);
+        }
+        .portfolio-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        .portfolio-info p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* --- Scroll Reveal Animation --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+            will-change: transform, opacity;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Contact --- */
+        .contact {
+            text-align: center;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 60px 20px;
+        }
+        .contact a {
+            color: var(--white);
+            text-decoration: underline;
+            margin: 0 10px;
+        }
+
+        /* --- Video Display Styles --- */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* --- About Section Styles --- */
+        .profile-img {
+            width: 220px;
+            height: 300px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 8px 25px rgba(163, 140, 122, 0.3);
+            opacity: 1;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .profile-img:hover {
+            transform: scale(1.02) translateY(-5px);
+            box-shadow: 0 15px 40px rgba(163, 140, 122, 0.4);
+            opacity: 1;
+        }
+
+        /* --- Resume Styles --- */
+        .resume-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 50px;
+            margin-top: 30px;
+        }
+        .resume-column h3 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 15px;
+            border-bottom: 1px solid var(--secondary-color);
+            padding-bottom: 8px;
+        }
+        .resume-entry {
+            position: relative;
+            margin-bottom: 0;
+            padding-left: 30px;
+            padding-bottom: 30px;
+            border-left: 2px solid var(--secondary-color);
+            transition: all 0.3s ease;
+            border-radius: 0 15px 15px 0;
+        }
+        .resume-entry:hover {
+            background-color: var(--white);
+            box-shadow: 0 10px 30px rgba(163, 140, 122, 0.1);
+        }
+        .resume-entry:last-child { 
+            border-left: 2px solid transparent; 
+        }
+        .resume-entry::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            border: 2px solid var(--white);
+            z-index: 1;
+        }
+        /* สีสันสำหรับจุด Timeline Marker แยกตามลำดับรายการ */
+        .resume-entry:nth-of-type(1)::before { background-color: #D4A373; } /* สีส้มอิฐ */
+        .resume-entry:nth-of-type(2)::before { background-color: #8E9775; } /* สีเขียวหม่น */
+        .resume-entry:nth-of-type(3)::before { background-color: #6D8299; } /* สีฟ้าเทา */
+        .resume-entry:nth-of-type(4)::before { background-color: #A38C7A; } /* สีน้ำตาลหลัก */
+        .resume-entry:nth-of-type(5)::before { background-color: #C2B280; } /* สีเหลืองทราย */
+        .resume-entry:nth-of-type(6)::before { background-color: #A5A5A5; } /* สีเทาเงิน */
+        .resume-entry:nth-of-type(7)::before { background-color: #D4A373; } 
+        .resume-entry:nth-of-type(8)::before { background-color: #8E9775; }
+
+        .resume-entry h4 { font-size: 1.25rem; margin-bottom: 5px; color: var(--text-dark); font-weight: 700; }
+        .resume-entry .date { color: var(--primary-color); font-weight: 600; font-size: 1rem; margin-bottom: 10px; display: block; }
+        .resume-entry p { font-size: 1.05rem; line-height: 1.7; }
+        
+        /* --- Resume Social Links --- */
+        .resume-social {
+            margin-top: 12px;
+            display: flex;
+            gap: 15px;
+        }
+        .social-link {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.3s;
+        }
+        .social-link:hover {
+            color: var(--primary-color);
+        }
+
+        .skill-list, .lang-list, .interest-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        .tag-item {
+            background: var(--white);
+            border: 1px solid var(--secondary-color);
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 1.05rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .skill-category {
+            font-size: 0.95rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* สีพื้นหลังแยกตามกลุ่มทักษะ */
+        .skill-list.video-group .tag-item { background-color: #F8F1EB; border-color: #EADBC8; }
+        .skill-list.design-group .tag-item { background-color: #F1F4E9; border-color: #DDE5B6; }
+        .skill-list.ai-group .tag-item { background-color: #EEF2F5; border-color: #DBE1E3; }
+        .lang-list .tag-item { background-color: #EBF2F7; border-color: #D3E0EA; } /* สีฟ้าอ่อนสำหรับภาษา */
+
+        /* สีพื้นหลังสำหรับหัวข้อ Interests เพื่อสื่อถึงอารมณ์ของแต่ละงานอดิเรก */
+        .interest-list .tag-item:nth-child(1) { background-color: #F8E9E9; border-color: #E6CECE; } /* ดูหนัง - ชมพูระเรื่อ */
+        .interest-list .tag-item:nth-child(2) { background-color: #FEF9E7; border-color: #F9E79F; } /* วาไรตี้ - เหลืองนวล */
+        .interest-list .tag-item:nth-child(3) { background-color: #EBF5FB; border-color: #AED6F1; } /* ข่าวสาร - ฟ้าอ่อน */
+        .interest-list .tag-item:nth-child(4) { background-color: #F4ECF7; border-color: #D7BDE2; } /* เล่นเกม - ม่วงอ่อน */
+        .interest-list .tag-item:nth-child(5) { background-color: #FDF2E9; border-color: #F5CBA7; } /* ฟังเพลง - ส้มสว่างอ่อน */
+        .interest-list .tag-item:nth-child(6) { background-color: #E8F8F5; border-color: #A3E4D7; } /* ถ่ายรูป - เขียวมินต์ */
+        .interest-list .tag-item:nth-child(7) { background-color: #EBF5FB; border-color: #AED6F1; } /* ละครเวที - ฟ้าอ่อน */
+
+        /* --- Video Slider Styles --- */
+        .video-slider-container {
+            grid-column: 1 / -1; /* ให้ slider ขยายเต็มความกว้างกริด */
+            width: 100%;
+            margin-top: 40px;
+            background-color: #F7F3EE; /* พื้นหลังสีครีมหม่นอ่อนๆ เพื่อแยกโซนวิดีโอ */
+            padding: 40px 20px;
+            border-radius: 25px;
+            border: 1px solid var(--secondary-color);
+        }
+        .video-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 10px 5px 25px 5px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) var(--secondary-color);
+            scroll-behavior: auto !important; /* ป้องกันการตีกันกับ Auto-scroll JS */
+        }
+        .video-slider::-webkit-scrollbar { 
+            height: 10px; 
+        }
+        .video-slider::-webkit-scrollbar-track { 
+            background: var(--secondary-color); 
+            border-radius: 10px;
+        }
+        .video-slider::-webkit-scrollbar-thumb { 
+            background: var(--primary-color); 
+            border-radius: 10px;
+            border: 2px solid var(--secondary-color);
+        }
+        .video-slider::-webkit-scrollbar-thumb:hover {
+            background: var(--text-dark);
+        }
+        
+        .video-item {
+            flex: 0 0 350px; /* ขนาดความกว้างของแต่ละคลิป */
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.08);
+            transform: translateZ(0); /* ช่วยให้การเรนเดอร์ iFrame นิ่งขึ้น */
+        }
+        @media (max-width: 768px) { .video-item { flex: 0 0 85%; } }
+
+        .project-case {
+            background: rgba(255,255,255,0.8);
+            border: 1px solid rgba(163, 140, 122, 0.12);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 12px 25px rgba(54, 44, 36, 0.05);
+        }
+        .case-label {
+            display: inline-block;
+            background: rgba(163, 140, 122, 0.12);
+            color: var(--primary-color);
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 0.74rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .project-case h3 {
+            margin: 0;
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            color: #0047AB;
+            text-align: left;
+        }
+        .case-subtitle {
+            margin: 8px 0 18px;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+        .case-block {
+            background: #f9f5f1;
+            border: 1px solid rgba(163, 140, 122, 0.08);
+            border-radius: 16px;
+            padding: 18px 16px;
+        }
+        .case-block h4 {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            margin: 0 0 10px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .case-block p,
+        .case-block li {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+        .case-block ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        .case-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .case-tools span {
+            background: var(--white);
+            border: 1px solid var(--secondary-color);
+            border-radius: 999px;
+            padding: 7px 12px;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        @media (max-width: 768px) {
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
+            .project-case {
+                padding: 18px 16px;
+            }
+        }
+
+        /* --- Project Highlight Styles --- */
+        .project-highlight {
+            display: flex;
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s ease;
+            margin-top: 30px;
+        }
+        .project-highlight:hover { transform: translateY(-5px); }
+        .highlight-img { flex: 0.7; min-height: 280px; }
+        .highlight-img img { width: 100%; height: 100%; object-fit: cover; }
+        .highlight-info { flex: 1; padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+        .highlight-info h3 { font-size: 1.8rem; color: var(--primary-color); margin-bottom: 15px; }
+        .highlight-info p { font-size: 1.1rem; line-height: 1.8; color: var(--text-light); }
+
+        @media (max-width: 992px) {
+            .project-highlight { flex-direction: column; }
+            .highlight-img { min-height: 250px; }
+            .highlight-info { padding: 30px; }
+        }
+
+        /* --- Lightbox Styles --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            cursor: default;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .lightbox.active img {
+            transform: scale(1);
+        }
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        /* --- Back to Top Button --- */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 2000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 24px;
+        }
+        #backToTop:hover {
+            background-color: var(--text-dark);
+            transform: translateY(-5px);
+        }
+
+        /* --- Animations --- */
+        @keyframes goldGlow {
+            0% { text-shadow: 0 0 5px rgba(212, 175, 55, 0); }
+            50% { text-shadow: 0 0 15px rgba(212, 175, 55, 0.6); }
+            100% { text-shadow: 0 0 8px rgba(212, 175, 55, 0.3); }
+        }
+        #projects.active .section-title {
+            animation: goldGlow 3s ease-in-out infinite alternate;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            padding: 20px;
+            transition: 0.3s;
+            z-index: 3001;
+        }
+        .lightbox-nav:hover {
+            color: var(--primary-color);
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+        .prev-btn { left: 10px; }
+        .next-btn { right: 10px; }
+
+        @media (max-width: 768px) {
+            .lightbox-nav { font-size: 30px; padding: 10px; }
+        }
+
+        @media (max-width: 850px) {
+            .resume-grid { grid-template-columns: 1fr; }
+        }
+
+        /* --- Download Button Style --- */
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            color: white !important;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(212, 163, 115, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-download:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(212, 163, 115, 0.4);
+        }
+
+        /* เอฟเฟกต์สีทองสว่าง (Gold Glow) เมื่อเลื่อนมาถึงส่วน Resume */
+        #resume.active .btn-download {
+            background: linear-gradient(45deg, #FFD700, #D4A373) !important;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            color: #3E3B38 !important; /* ปรับสีตัวอักษรให้เข้มขึ้นเพื่อให้ตัดกับสีทอง */
+            animation: gold-glow-pulse 1.5s infinite alternate;
+        }
+
+        @keyframes gold-glow-pulse {
+            from {
+                box-shadow: 0 0 10px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
+            }
+            to {
+                box-shadow: 0 0 25px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.4);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Kawintida Portfolio</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#portfolio">Work</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <h1 class="reveal">Hello, I'm <span style="color: #000000;">TangTang</span> <span style="color: var(--primary-color);">Kawintida Panyachai</span></h1>
+        <div class="reveal" style="font-size: 1.5rem; color: var(--text-light); margin-top: 10px;">Graphic Designer & Video Editor</div>
+        <div class="reveal" style="font-size: 1.1rem; color: var(--text-light); margin-top: 8px;">Creating visuals, content & digital experiences.</div>
+        <!-- เพิ่มปุ่ม Download ในหน้า Hero -->
+        <div class="reveal" style="margin-top: 35px;">
+            <a href="resume.pdf" download="กวินธิดา ปัญญาชัย Resume.pdf" class="btn-download">
+                <span>📥 Download Resume (PDF)</span>
+            </a>
+        </div>
+    </section>
+
+    <section id="about" class="reveal">
+        <h2 class="section-title">About Me</h2>
+        <div class="project-highlight" style="margin-top: 40px;">
+            <div class="highlight-img">
+                <img src="Tangtang.jpg" alt="Kawintida Panyachai">
+            </div>
+            <div class="highlight-info">
+                <h3 style="font-size: 1.8rem;">Kawintida Panyachai</h3>
+                <p style="font-size: 1rem; margin: 10px 0;">นางสาว กวินธิดา ปัญญาชัย</p>
+                <p style="font-size: 0.95rem; color: var(--text-light); margin-top: 20px; line-height: 1.8;">
+                    อายุ 22 ปี เกิด 5 พฤศจิกายน 2546 ปัจจุบันจบระดับปริญญาตรี มหาวิทยาลัยพะเยา คณะเทคโนโลยีสารสนเทศและการสื่อสาร สาขาคอมพิวเตอร์กราฟิกและมัลติมีเดีย มีความสนใจเรื่องการอัพเดตข่าวสารต่างๆ ตัดต่อภาพและวิดีโอ เป็นคนตรงต่อเวลาและสามารถทำงานได้ไม่รู้จักเหนื่อยและพร้อมเก็บประสบการณ์และเรียนรู้สิ่งใหม่ๆ และสามารถปรับตัวเข้าหาคนในทีมได้ดี
+                </p>
+                <p style="font-size: 0.9rem; margin-top: 15px;"><strong>MBTI:</strong> INFP</p>
+                <p style="font-size: 0.9rem; margin-top: 8px;"><strong>Email:</strong> kawintida323@gmail.com</p>
+                <p style="font-size: 0.9rem; margin-top: 8px;"><strong>Phone:</strong> 0615139372</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="resume" class="reveal">
+        <h2 class="section-title">My Resume</h2>
+        <!-- เพิ่มปุ่ม Download ในหน้า Resume -->
+        <div style="text-align: center; margin-top: -30px; margin-bottom: 50px;">
+            <a href="resume.pdf" download="Kawintida_Resume.pdf" class="btn-download">
+                <span>📄 Download Full CV / Resume</span>
+            </a>
+        </div>
+        <div class="resume-grid">
+            <div class="resume-column">
+                <h3>Experience</h3>
+                <div class="resume-entry">
+                    <span class="date">เมษายน 2569 - ปัจจุบัน</span>
+                    <h4>โปรเจกต์วีทูเบอร์ สังกัด นอกทะเล </h4>
+                      <h4>โดยทำหน้าที่หลักให้กับช่อง @ninger_หนิ่งเอ๋อ </h4>
+                    <p>ตำแหน่ง : Graphic Design and Video Editor<br>หน้าที่หลัก : จัดทำ Thumbnail และตัดคลิป Shorts ตามที่รับมอบหมายเพื่อลงในช่องทาง Social Media ต่างๆของVtuberในโปรเจกต์</p>
+                    <div class="resume-social">
+                        <a href="https://www.youtube.com/@ninger_%E0%B8%AB%E0%B8%99%E0%B8%B4%E0%B9%88%E0%B8%87%E0%B9%80%E0%B8%AD%E0%B9%8B%E0%B8%AD" target="_blank" rel="noopener noreferrer" class="social-link">🌐 Project Social</a>
+                        <a href="https://www.youtube.com/shorts/oghrX2_LAAk" target="_blank" rel="noopener noreferrer" class="social-link">🎬 Sample Clip</a>
+                    </div>
+                </div>
+                <div class="resume-entry">
+                    <span class="date">3 พ.ย. 2568 - 20 ก.พ. 2569</span>
+                    <h4>บริษัท จีเอ็มเอ็ม แกรมมี่ จำกัด (มหาชน)</h4>
+                    <p>ฝึกงานตำแหน่ง : Graphic Design and Music Creators<br>หน้าที่หลัก : จัด Playlist และทำ Content ให้กับ Social Media ของหน่วยงาน,
+                        ตัดคลิปShorts คิดชื่อคลิป Playlist ลงช่องYouTubeของหน่วยงาน</p>
+                </div>
+                <div class="resume-entry">
+                    <span class="date">มกราคม 2568 - ปัจจุบัน</span>
+                    <h4>เพจอินสตาแกรม : Saslothartwork</h4>
+                    <p>หน้าที่หลัก : ทำกราฟิกในโอกาสวันคล้ายวันเกิดของศิลปิน/ดาราที่ชื่นชอบ</p>
+                    <div class="resume-social">
+                        <a href="https://www.instagram.com/saslothartwork/" target="_blank" class="social-link">📸 Instagram: @saslothartwork</a>
+                    </div>
+                </div>
+                <div class="resume-entry">
+                    <span class="date">2567 - กุมภาพันธ์ 2569</span>
+                    <h4>ยูทูบช่อง มู๊นมูน | Moonlight Ch.</h4>
+                    <p>ตำแหน่ง : Graphic Design and Editor<br>หน้าที่หลัก : จัดทำ Thumbnail และตัดคลิป Shorts</p>
+                    <div class="resume-social">
+                        <a href="#" target="_blank" class="social-link">📺 Moonlight Ch.</a>
+                    </div>
+                </div>
+                <div class="resume-entry">
+                    <span class="date">2564 - ปัจจุบัน</span>
+                    <h4>แอดมินเพจอินสตาแกรม Umkijoon_support</h4>
+                    <p>หน้าที่หลัก : ทำ Thumbnail อัปเดตข่าวสารต่างๆ และสื่อสารคุยกับลูกเพจหลังบ้าน</p>
+                    <div class="resume-social">
+                        <a href="https://www.instagram.com/umkijoon_support/" target="_blank" class="social-link">📸 Instagram: @umkijoon_support</a>
+                    </div>
+                </div>
+                <div class="resume-entry">
+                    <span class="date">2559 - ปัจจุบัน</span>
+                    <h4>ยูทูบส่วนตัวช่อง SaSaloth's</h4>
+                    <p>ตำแหน่ง : Editor และ Graphic Design<br>หน้าที่หลัก : ส่วนใหญ่ตัดต่อในสิ่งที่ตนเองกำลังสนใจขณะนั้น</p>
+                    <div class="resume-social">
+                        <a href="https://www.youtube.com/@sasloth_satang" target="_blank" class="social-link">📺 SaSaloth's Channel</a>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 40px;">Education</h3>
+                <div class="resume-entry">
+                    <span class="date">พ.ศ 2565 - 2569</span>
+                    <h4>มหาวิทยาลัยพะเยา</h4>
+                    <p>จบการศึกษาระดับปริญญาตรี คณะเทคโนโลยีสารสนเทศและการสื่อสาร<br>สาขาคอมพิวเตอร์กราฟิกและมัลติมีเดีย</p>
+                </div>
+                <div class="resume-entry">
+                    <span class="date">พ.ศ 2562 - 2565</span>
+                    <h4>โรงเรียนลำปางกัลยาณี</h4>
+                    <p>จบระดับมัธยมศึกษาตอนปลาย</p>
+                </div>
+            </div>
+
+            <div class="resume-column">
+                <h3>Skills</h3>
+                <div class="skill-category">Video Editing And Music Creators</div>
+                <div class="skill-list video-group">
+                    <div class="tag-item">Aegisub</div>
+                    <div class="tag-item">CapCut</div>
+                    <div class="tag-item">Premiere Pro</div>
+                </div>
+
+                <div class="skill-category">Design</div>
+                <div class="skill-list design-group">
+                    <div class="tag-item">Photoshop</div>
+                    <div class="tag-item">Illustrator</div>
+                    <div class="tag-item">Procreate</div>
+                    <div class="tag-item">Canva</div>
+                    <div class="tag-item">Figma</div>
+                </div>
+
+                <div class="skill-category">AI Tools</div>
+                <div class="skill-list ai-group">
+                    <div class="tag-item">Gemini</div>
+                    <div class="tag-item">ChatGPT</div>
+                    <div class="tag-item">Claude</div>
+                </div>
+
+                <h3>Languages</h3>
+                <div class="lang-list">
+                    <div class="tag-item">ภาษาไทย (Native)</div>
+                    <div class="tag-item">ภาษาอังกฤษ</div>
+                    <div class="tag-item">ภาษาเกาหลี</div>
+                    <div class="tag-item">ภาษามือ</div>
+                </div>
+
+                <h3>Interests</h3>
+                <div class="interest-list">
+                    <div class="tag-item">🎬 ดูหนัง/ละคร ไทยและต่างประเทศ</div>
+                    <div class="tag-item">📺 ดูวาไรตี้/เกมโชว์</div>
+                    <div class="tag-item">📰 ตามข่าวสารบ้านเมือง</div>
+                    <div class="tag-item">🎮 เล่นเกม</div>
+                    <div class="tag-item">📻 ฟังเพลงเก่ายุค90</div>
+                    <div class="tag-item">📸 ถ่ายรูป</div>
+                    <div class="tag-item">🎭 ชอบดูละครเวที</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="reveal">
+        <h2 class="section-title">My Works</h2>
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterSelection('big-projects')">The Big Projects</button>
+            <button class="filter-btn" onclick="filterSelection('internship')">Internship</button>
+            <button class="filter-btn" onclick="filterSelection('graphic')">Graphic Design</button>
+            <button class="filter-btn" onclick="filterSelection('editor')">Editor</button>
+        </div>
+
+        <div class="portfolio-grid">
+            <!-- ย้ายส่วน GMM Grammy มาไว้ที่ด้านบนสุดของ Grid -->
+            <div class="video-slider-container filter-item video" data-filter="internship" style="background-color: #F0F7FF; border-color: #D1E3FF;">
+                <div class="project-case">
+                    <div class="case-label">Featured Project</div>
+                    <h3>GMM Grammy</h3>
+                    <p class="case-subtitle">Graphic Design &amp; Music Content</p>
+
+                    <div class="case-grid">
+                        <div class="case-block">
+                            <h4>Role</h4>
+                            <p>Graphic Designer / Content Creator จัด Playlist และทำ Content ให้กับ Social Media ของหน่วยงาน, ตัดคลิปShorts คิดชื่อคลิป Playlist ลงช่องYouTubeของหน่วยงาน</p>
+                        </div>
+                        <div class="case-block">
+                            <h4>What I Did</h4>
+                            <ul>
+                                <li>Playlist Curation</li>
+                                <li>YouTube Content</li>
+                                <li>Shorts Editing</li>
+                                <li>Thumbnail / Graphic Design</li>
+                            </ul>
+                        </div>
+                        <div class="case-block">
+                            <h4>Tools</h4>
+                            <div class="case-tools">
+                                <span>Photoshop</span>
+                                <span>Premiere Pro</span>
+                                <span>CapCut</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="text-align: center; color: var(--text-light); font-size: 0.9rem; margin-bottom: 20px;">ตัวอย่างคลิปที่ลงเป็นทางการระหว่างฝึกงานที่บริษัท จีเอ็มเอ็ม แกรมมี่ จำกัด (มหาชน)</p>
+                <div class="video-slider">
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/5dqLnI1JmRo?si=L2Dh4eWkIpLCksr6"></iframe></div>
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: #0047AB; text-shadow: 0 0 10px rgba(0, 71, 171, 0.2);">(เพลงฮิตติดชาร์จตลอดกาล รวมเพลงฮิต 2026)</h3></div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/VXLp3fYrzuw?si=ej6cV2BGYf3Yh6EJ"></iframe></div>
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: #0047AB; text-shadow: 0 0 10px rgba(0, 71, 171, 0.2);">เพลงฮิตร้านเหล้า รวมคนเลวที่รักเธอ 【LONGPLAY】</h3></div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/VYMgmDZwQas?si=cAoIQ2iccAYDVVFA"></iframe></div>
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3>รวมเพลง อัสนี วสันต์ ยุค 90,s สุดฮิต</h3><p style="color: var(--text-light); font-size: 0.85rem;">คิดชื่อ Playlist และค้นหาเพลงเพื่อเข้ากับตัว Playlist เพื่อให้คนฟังได้อารมณ์</p></div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/hn_pPNhCKzU?start=38"></iframe></div>
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3>รวมเพลง อัสนี วสันต์ ยุค 2000,s</h3><p style="color: var(--text-light); font-size: 0.85rem;">คิดชื่อ Playlist และค้นหาเพลงเพื่อเข้ากับตัว Playlist เพื่อให้คนฟังได้อารมณ์</p></div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/aoQDu0sD0d4?start=61"></iframe></div>
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3>LONGPLAY SPECIAL เพลงชิลเพลงดัง ฟังสบายหน้าหนาว</h3><p style="color: var(--text-light); font-size: 0.85rem;">คิดชื่อ Playlist และค้นหาเพลงเพื่อเข้ากับตัว Playlist เพื่อให้คนฟังได้อารมณ์</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-slider-container filter-item video" data-filter="internship" style="background-color: #F6F4FF; border-color: #E4DFFE; grid-column: 1 / -1; margin-top: 10px;">
+                <h3 style="font-size: 1.8rem; color: #5B4B8A; margin-bottom: 5px; text-align: center; text-shadow: 0 0 15px rgba(91, 75, 138, 0.18);">Official GMM Karaoke </h3>
+                <p style="text-align: center; color: var(--text-light); font-size: 0.9rem; margin-bottom: 20px;">คลิปเพลงได้มอบหมายในการทำซับเพลงคาราโอเกะ ลงเป็นทางการระหว่างฝึกงานที่บริษัท จีเอ็มเอ็ม แกรมมี่ จำกัด (มหาชน)</p>
+                <a href="https://www.youtube.com/watch?v=cpNA1zRM-X0" target="_blank" rel="noopener noreferrer" class="project-highlight" style="text-decoration: none; color: inherit; max-width: 900px; margin: 0 auto; display: flex; align-items: stretch;">
+                    <div class="highlight-img" style="flex: 0.8; min-height: 260px; position: relative;">
+                        <img src="รูปนางฟ้ากลับสวรรค์.jpg" alt="นางฟ้ากลับสวรรค์" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="Screenshot 2026-03-05 204034.png" alt="Process screenshot" style="position: absolute; right: 12px; bottom: 12px; width: 120px; height: auto; border-radius: 12px; border: 3px solid rgba(255,255,255,0.9); box-shadow: 0 8px 20px rgba(0,0,0,0.15); object-fit: cover; background: #fff;">
+                    </div>
+                    <div class="highlight-info" style="flex: 1; padding: 26px 30px;">
+                        <h3 style="font-size: 1.8rem; margin-bottom: 10px;">เพลงนางฟ้ากลับสวรรค์ - ตรี ชัยณรงค์</h3>
+                        <p style="font-size: 1rem; color: var(--text-light); line-height: 1.8;">ผลงานที่ใช้Premiere Proในการทำซับเพลงคาราโอเกะโดยที่จับจังหวะให้ตรงกับเสียงนักร้อง</p>
+                        <p style="margin-top: 18px; font-size: 1rem; color: var(--accent-color); font-weight: 600;">คลิกเพื่อเปิดคลิปใน YouTube ↗</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="video-slider-container filter-item graphic" data-filter="graphic" style="background-color: #FFF9F5; border-color: #F3E5D8; grid-column: 1 / -1; margin-top: 10px;">
+                <div class="project-case">
+                    <div class="case-label">Selected Works</div>
+                    <h3 style="color: var(--accent-color);">Graphic Design Works</h3>
+                    <p class="case-subtitle">Thumbnail, Artwork &amp; Visual Content</p>
+
+                    <div class="case-grid">
+                        <div class="case-block">
+                            <h4>Role</h4>
+                            <p>Graphic Designer / Visual Content Creator</p>
+                        </div>
+                        <div class="case-block">
+                            <h4>What I Did</h4>
+                            <ul>
+                                <li>YouTube Thumbnail</li>
+                                <li>Fan Art / Birthday Artwork</li>
+                                <li>Social Media Visuals</li>
+                                <li>Content Design</li>
+                            </ul>
+                        </div>
+                        <div class="case-block">
+                            <h4>Tools</h4>
+                            <div class="case-tools">
+                                <span>Photoshop</span>
+                                <span>Illustrator</span>
+                                <span>Procreate</span>
+                                <span>Canva</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="text-align: center; color: var(--text-light); font-size: 0.9rem; margin-bottom: 20px;">รวบรวมผลงานการออกแบบ Thumbnail และ Artwork ต่างๆ</p>
+                <div class="video-slider">
+                    <a href="#" class="video-item" style="text-decoration: none; color: inherit;">
+                        <img src="Ep2.png" alt="Free talk 2" class="portfolio-image">
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Free talk 2</h3><p>ทำThumbnailยูทูปช่องKurumi Maki Ch.</p></div>
+                    </a>
+                    <a href="#" class="video-item" style="text-decoration: none; color: inherit;">
+                        <img src="Ep1.png" alt="Free talk 1" class="portfolio-image">
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Free talk 1</h3><p>ทำThumbnailยูทูปช่องKurumi Maki Ch.</p></div>
+                    </a>
+                    <a href="https://www.instagram.com/p/DXZfuAfk582/" target="_blank" class="video-item" style="text-decoration: none; color: inherit;">
+                        <img src="umjoon.jpg" alt="Happy Umkijoon Day" class="portfolio-image">
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Happy Umkijoon Day</h3><p>ทำArtworkในโอกาสวันเกิดศิลปิน</p></div>
+                    </a>
+                    <a href="#" class="video-item" style="text-decoration: none; color: inherit;">
+                        <img src="jin kyung.jpg" alt="Happy Jin Kyung Day" class="portfolio-image">
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Happy Jin Kyung Day</h3><p>ทำArtworkในโอกาสวันเกิดศิลปิน</p></div>
+                    </a>
+                    <a href="https://www.instagram.com/p/DR184SVE_lr/" target="_blank" class="video-item" style="text-decoration: none; color: inherit;">
+                        <img src="sungmin_page-0001.jpg" alt="Happy Sung Min Day" class="portfolio-image">
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Happy Sung Min Day</h3><p>ทำArtworkในโอกาสวันเกิดศิลปิน</p></div>
+                    </a>
+                    <a href="https://www.youtube.com/live/WLczOHtClmM?si=Z8hGPYfUGGa_-Yi1" target="_blank" class="video-item" style="text-decoration: none; color: inherit;">
+                        <img src="valo2.png" alt="(งานกราฟิกเกม Valorant + สงครามส่งด่วนที่ดังเป็นแสในตอนนั้น ทำให้ช่องยูทูปMr Zane)" class="portfolio-image">
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">(งานกราฟิกเกม Valorant + สงครามส่งด่วนที่ดังเป็นแสในตอนนั้น ทำให้ช่องยูทูปMr Zane)</h3><p>Graphic Design / YouTube Content</p></div>
+                    </a>
+                    <a href="#" class="video-item" style="text-decoration: none; color: inherit;">
+                        <img src="gartic phone.png" alt="ตัวอย่างThumbnail เกมgarticphone ยูทูปช่อง มู๊นมูน | Moonlight Ch." class="portfolio-image">
+                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">ตัวอย่างThumbnail เกมgarticphone ยูทูปช่อง มู๊นมูน | Moonlight Ch.</h3><p>Thumbnail สำหรับเกม Gartic Phone #VtubeTH</p></div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="video-slider-container filter-item video" data-filter="big-projects" style="background-color: #FFF9F3; border-color: #F4DAB3; grid-column: 1 / -1; margin-top: 12px;">
+                <h3 style="font-size: 1.8rem; color: #D4AF37; margin-bottom: 5px; text-align: center;">The Big Projects</h3>
+                <p style="text-align: center; margin-top: 5px; margin-bottom: 20px; color: var(--text-light); font-size: 1rem;">UmkijoonThaiFansProject x บ้านเบส UMKIJOON THAILAND</p>
+                
+                <a href="https://x.com/centerpoint_ent/status/1440103482204176389?s=20" target="_blank" class="project-highlight" style="max-width: 980px; margin: 0 auto;">
+                    <div class="highlight-img">
+                        <img src="E_X-2OcVEAYZX8M.jfif" alt="Umkijoon Thai Fans Project">
+                    </div>
+                    <div class="highlight-info">
+                        <h3>Umkijoon Thai Fans Project</h3>
+                        <p>โปรเจกต์พิเศษสนับสนุนศิลปิน (Fan Support Project) ร่วมกับบ้านเบส UMKIJOON THAILAND เพื่อแสดงความรักและความยินดีในโอกาสสำคัญ ที่Centerpoint Entertainment ในงาน“ด้อมมิดเดิลเอจร่วมใจส่งเมนไปเซ็นเตอร์พ้อยท์” วันที่ 21-23 กันยายน ปี 2564</p>
+                        <p style="font-size: 0.95rem; color: var(--text-light); margin-top: 15px; line-height: 1.8; text-align: justify; letter-spacing: 0.2px;">* รูปที่เห็นเป็นรูปที่รับการคัดเลือกให้เห็นป้ายวันนั้น และ ตนเองทำหน้าที่ประสานงานหลักและเป็น 1 ในคณะกรรมการในโปรโมททำป้ายโปรโมทในงาน“ด้อมมิดเดิลเอจร่วมใจส่งเมนไปเซ็นเตอร์พ้อยท์” ซึ่งเป็นงานที่รวมบ้านแฟนคลับด้อมต่างๆพร้อมใจทำป้ายโปรโมทหรือเนื่องในโอกาสวันสำคัญให้กับศิลปินที่ชอบ</p>
+                        <p style="margin-top: 20px; font-size: 1rem; color: var(--accent-color); font-weight: 600;">คลิกเพื่อดูรายละเอียดโปรเจกต์ ↗</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="video-slider-container filter-item video" data-filter="editor" style="grid-column: 1 / -1; margin-top: 20px;">
+                <div class="project-case">
+                    <div class="case-label">Selected Works</div>
+                    <h3 style="color: var(--accent-color);">Video Editing Works</h3>
+                    <p class="case-subtitle">Video Editing, Short-form Content &amp; Visual Storytelling</p>
+
+                    <div class="case-grid">
+                        <div class="case-block">
+                            <h4>Role</h4>
+                            <p>Video Editor / Content Creator</p>
+                        </div>
+                        <div class="case-block">
+                            <h4>What I Did</h4>
+                            <ul>
+                                <li>Shorts Editing</li>
+                                <li>Video Storytelling</li>
+                                <li>Fan-made Content</li>
+                                <li>Social Media Video</li>
+                            </ul>
+                        </div>
+                        <div class="case-block">
+                            <h4>Tools</h4>
+                            <div class="case-tools">
+                                <span>Premiere Pro</span>
+                                <span>CapCut</span>
+                                <span>Aegisub</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 1.8rem; color: #D4A373; margin-bottom: 5px; text-align: center;">Video And Video Shots</h3>
+                <p style="text-align: center; color: #E2C08D; font-size: 0.9rem; margin-bottom: 20px;">รวมตัวอย่างคลิปที่ตนเองได้ทำมา</p>
+                <div class="video-slider">
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/g7m734R0EE4"></iframe></div>
+                        <div class="portfolio-info">
+                            <h3>Q&A ใครเอ๋อกันไม่มีหลอกEp1</h3>
+                            <p style="color: var(--text-light); font-size: 0.85rem;">ทำให้ช่องยูทูปหนิ่งเอ๋อ🐬 1ในวีทูบโปรเจกต์วีทูเบอร์ สังกัด นอกทะเล (ชื่อยังไม่เป็นทางการ)</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/k0ehbdxSDhs"></iframe></div>
+                        <div class="portfolio-info">
+                            <h3>(OVP)The Penthouse | Believer</h3>
+                            <p style="color: var(--text-light); font-size: 0.85rem;">ตัดในแนวOVPหรือแฟนคลับของแต่ขึ้นมาเอง </p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/hUwWtJxfr70"></iframe></div>
+                        <div class="portfolio-info">
+                            <h3>บ้านนี้มีรัก x Runningman 600EP</h3>
+                            <p style="color: var(--text-light); font-size: 0.85rem;">ทำคลิปฉลองครบ600EPรายการ Runningman วาไรตี้ดังประเทศเกาหลี</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/oghrX2_LAAk"></iframe></div>
+                        <div class="portfolio-info">
+                            <h3>โปรโหมดดิสของหนิ่งเอ๋อ</h3>
+                            <p style="color: var(--text-light); font-size: 0.85rem;">ทำให้ช่องยูทูปหนิ่งเอ๋อ🐬 1ในวีทูบโปรเจกต์วีทูเบอร์ สังกัด นอกทะเล (ชื่อยังไม่เป็นทางการ)</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/3bqhz-SHofc"></iframe></div>
+                        <div class="portfolio-info">
+                            <h3>คําว่าฮักมันเฮี่ยถิ่มไส - #มนต์แคนแก่นคูน</h3>
+                            <p style="color: var(--text-light); font-size: 0.85rem;">คลิปสั้น Video Shot</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/JQCQsLx6un8"></iframe></div>
+                        <div class="portfolio-info">
+                            <h3>10ล้านวิว!! #คองเพิ่ง</h3>
+                            <p style="color: var(--text-light); font-size: 0.85rem;">คลิปสั้น Video Shot</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container"><iframe src="https://www.youtube.com/embed/5G6fDHzMoYA"></iframe></div>
+                        <div class="portfolio-info">
+                            <h3>ตาๆต้องชื้อแว่นแล้วบ่เน้อออ #ศิริพรอำไพพงษ์ </h3>
+                            <p style="color: var(--text-light); font-size: 0.85rem;">คลิปสั้น Video Shot</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Structure -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox">&times;</span>
+        <span class="lightbox-nav prev-btn" onclick="changeImage(-1, event)">&#10094;</span>
+        <span class="lightbox-nav next-btn" onclick="changeImage(1, event)">&#10095;</span>
+        <img id="lightbox-img" src="" alt="Enlarged Work" onclick="event.stopPropagation()">
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" onclick="scrollToTop()">↑</button>
+
+    <section id="contact" class="contact reveal">
+        <h2>Let's Work Together</h2>
+        <p style="margin: 20px 0;">พร้อมที่จะสร้างสรรค์โปรเจกต์ใหม่ๆ ไปด้วยกันแล้วหรือยัง?</p>
+        <p>
+            <a href="kawintida323@gmail.com">Email Me</a> | 
+            <a href="https://www.linkedin.com/in/kawintida-panyachai-5b380b3a1" target="_blank">LinkedIn</a>
+        </p>
+    </section>
+
+    <script>
+        // 1. Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+            
+            // Sticky Nav Scroll Effect
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+
+            // Control Back to Top visibility
+            const btn = document.getElementById('backToTop');
+            if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+                btn.style.display = 'flex';
+            } else {
+                btn.style.display = 'none';
+            }
+        }
+        window.addEventListener("scroll", reveal);
+
+        reveal(); // เรียกใช้ครั้งแรกตอนโหลดหน้าเว็บ
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.querySelector('nav ul');
+        const navLinks = document.querySelectorAll('nav ul a');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // 2. Category Filter Logic
+        function filterSelection(c) {
+            var x, i;
+            x = document.getElementsByClassName("filter-item");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none"; // ซ่อนทั้งหมดก่อน
+                var itemFilter = x[i].getAttribute("data-filter");
+                if (itemFilter === c) {
+                    x[i].style.display = "block";
+                    x[i].style.animation = "fadeIn 0.5s";
+                }
+            }
+            
+            // เปลี่ยนสีปุ่มที่กด (Active state)
+            var btns = document.getElementsByClassName("filter-btn");
+            for (i = 0; i < btns.length; i++) {
+                btns[i].classList.remove("active");
+            }
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add("active");
+            }
+        }
+        
+        // กำหนดให้แสดง "The Big Projects" ตั้งแต่เริ่ม
+        filterSelection('big-projects');
+
+        // 3. Lightbox Logic
+        let currentImgIndex = 0;
+        let visibleImages = [];
+
+        function openLightbox(imgElement) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            // เก็บรายการรูปภาพที่แสดงอยู่ในปัจจุบัน (ตาม Filter)
+            visibleImages = Array.from(document.querySelectorAll('.portfolio-image')).filter(img => !img.closest('.filter-item.video') && img.offsetParent !== null);
+            currentImgIndex = visibleImages.indexOf(imgElement);
+
+            lightboxImg.src = imgElement.src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // ป้องกันการเลื่อนหน้าจอเบื้องหลัง
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function changeImage(step, event) {
+            event.stopPropagation(); // ไม่ให้ปิด Lightbox เมื่อกดปุ่ม
+            currentImgIndex += step;
+
+            // วนลูปรูปภาพ
+            if (currentImgIndex >= visibleImages.length) currentImgIndex = 0;
+            if (currentImgIndex < 0) currentImgIndex = visibleImages.length - 1;
+
+            const lightboxImg = document.getElementById('lightbox-img');
+            // เพิ่มเอฟเฟกต์การเปลี่ยนรูปเล็กน้อย
+            lightboxImg.style.opacity = '0';
+            setTimeout(() => {
+                lightboxImg.src = visibleImages[currentImgIndex].src;
+                lightboxImg.style.opacity = '1';
+            }, 150);
+        }
+
+        // ผูกเหตุการณ์คลิกกับรูปภาพผลงาน (ยกเว้นวิดีโอ)
+        document.addEventListener('click', function(e) {
+            const card = e.target.closest('.portfolio-card, .video-item');
+            if (!card) return;
+
+            const isVideoSection = card.closest('.filter-item.video');
+            
+            if (card && !isVideoSection) {
+                const img = card.querySelector('.portfolio-image');
+                const href = card.getAttribute('href');
+                
+                // เปิด Lightbox เฉพาะเมื่อไม่มีลิงก์ หรือลิงก์เป็น # เท่านั้น เพื่อให้ลิงก์จริง (เช่น YouTube) ทำงานได้
+                if (img && (!href || href === '#')) {
+                    e.preventDefault();
+                    openLightbox(img);
+                }
+            }
+        });
+
+        // Auto-scroll for video sliders
+        document.querySelectorAll('.video-slider').forEach(slider => {
+            let scrollInterval;
+            let scrollAmount = 1; // Pixels to scroll per step
+            let scrollSpeed = 40; // Milliseconds per step (ปรับค่าเพื่อความเร็วที่ต้องการ)
+
+            const startScrolling = () => {
+                scrollInterval = setInterval(() => {
+                    slider.scrollLeft += scrollAmount;
+                    // หากเลื่อนไปจนสุด ให้วนกลับไปเริ่มต้นใหม่
+                    if (slider.scrollLeft >= (slider.scrollWidth - slider.clientWidth - 1)) { // -1 เพื่อแก้ปัญหาการปัดเศษของเบราว์เซอร์
+                        slider.scrollLeft = 0;
+                    }
+                }, scrollSpeed);
+            };
+
+            const stopScrolling = () => {
+                clearInterval(scrollInterval);
+            };
+
+            startScrolling(); // เริ่มเลื่อนอัตโนมัติเมื่อโหลดหน้าเว็บ
+            slider.addEventListener('mouseenter', stopScrolling); // หยุดเมื่อเมาส์ชี้
+            slider.addEventListener('mouseleave', startScrolling); // เลื่อนต่อเมื่อเมาส์ออก
+        });
+    </script>
+    
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</body>
+</html>
