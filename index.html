@@ -94,7 +94,7 @@
             transition: all 0.3s ease;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             nav { padding: 15px 20px; }
             nav .logo { font-size: 1.2rem; }
             .hamburger { display: flex; }
@@ -103,8 +103,9 @@
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 75%;
+                width: min(82vw, 360px);
                 height: 100vh;
+                height: 100dvh;
                 background-color: var(--bg-color);
                 flex-direction: column;
                 justify-content: center;
@@ -280,7 +281,7 @@
             height: 400px; /* ลดความสูงพื้นฐานลงเล็กน้อยเพื่อความสมดุล */
             background-color: var(--secondary-color);
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.4s ease;
             border-bottom: 1px solid rgba(0,0,0,0.02); /* เพิ่มเส้นคั่นบางๆ ให้รูปดูคมชัดขึ้น */
         }
         @media (max-width: 768px) {
@@ -288,6 +289,10 @@
         }
         .portfolio-card:hover .portfolio-image {
             transform: scale(1.05);
+        }
+        .video-item:hover .portfolio-image,
+        .video-item:focus-visible .portfolio-image {
+            transform: scale(1.04);
         }
         .portfolio-info {
             padding: 20px;
@@ -299,6 +304,10 @@
         .portfolio-info h3 {
             font-size: 1.2rem;
             margin-bottom: 5px;
+        }
+        .filter-item[data-filter="internship"] .video-item .portfolio-info h3 {
+            color: #0047AB;
+            text-shadow: 0 0 10px rgba(0, 71, 171, 0.2);
         }
         .portfolio-info p {
             font-size: 0.9rem;
@@ -480,6 +489,7 @@
         .interest-list .tag-item:nth-child(5) { background-color: #FDF2E9; border-color: #F5CBA7; } /* ฟังเพลง - ส้มสว่างอ่อน */
         .interest-list .tag-item:nth-child(6) { background-color: #E8F8F5; border-color: #A3E4D7; } /* ถ่ายรูป - เขียวมินต์ */
         .interest-list .tag-item:nth-child(7) { background-color: #EBF5FB; border-color: #AED6F1; } /* ละครเวที - ฟ้าอ่อน */
+        .interest-list .interest-writing { background-color: #F4ECF7; border-color: #D7BDE2; }
 
         /* --- Video Slider Styles --- */
         .video-slider-container {
@@ -627,11 +637,15 @@
         .highlight-info { flex: 1; padding: 40px; display: flex; flex-direction: column; justify-content: center; }
         .highlight-info h3 { font-size: 1.8rem; color: var(--primary-color); margin-bottom: 15px; }
         .highlight-info p { font-size: 1.1rem; line-height: 1.8; color: var(--text-light); }
+        .gmm-artwork .highlight-img { flex: 1.2; min-height: 380px; position: relative; background-color: #F0F7FF; }
+        .gmm-artwork .highlight-img > img:first-child { object-fit: contain; }
+        .gmm-artwork .process-preview { position: absolute; right: 12px; bottom: 12px; width: 120px; height: auto; border-radius: 12px; border: 3px solid rgba(255,255,255,0.9); box-shadow: 0 8px 20px rgba(0,0,0,0.15); object-fit: cover; background: #fff; }
 
         @media (max-width: 992px) {
             .project-highlight { flex-direction: column; }
             .highlight-img { min-height: 250px; }
             .highlight-info { padding: 30px; }
+            .gmm-artwork .highlight-img { min-height: 320px; }
         }
 
         /* --- Lightbox Styles --- */
@@ -778,6 +792,206 @@
                 box-shadow: 0 0 25px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.4);
             }
         }
+
+        .theme-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border: 1px solid var(--secondary-color);
+            border-radius: 999px;
+            background: transparent;
+            color: var(--text-dark);
+            font-size: 0.85rem;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+        }
+        .theme-toggle:hover {
+            background-color: var(--secondary-color);
+        }
+        .theme-toggle:focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 3px;
+        }
+        .theme-toggle-icon {
+            font-size: 1rem;
+            line-height: 1;
+        }
+        body.dark-mode {
+            --bg-color: #191A1C;
+            --text-dark: #F1ECE7;
+            --text-light: #C0B7AF;
+            --primary-color: #C6A68C;
+            --secondary-color: #49413B;
+            --accent-color: #E0AE7D;
+            color-scheme: dark;
+        }
+        body.dark-mode nav,
+        body.dark-mode nav.scrolled {
+            background-color: rgba(25, 26, 28, 0.96);
+        }
+        body.dark-mode nav.scrolled a {
+            color: var(--text-dark);
+        }
+        body.dark-mode .filter-item[data-filter="internship"] .project-case h3 {
+            color: #8EC5FF;
+        }
+        body.dark-mode .filter-item[data-filter="internship"] .video-item .portfolio-info h3 {
+            color: #8EC5FF !important;
+            text-shadow: 0 0 10px rgba(142, 197, 255, 0.28) !important;
+        }
+        body.dark-mode .portfolio-card,
+        body.dark-mode .video-item,
+        body.dark-mode .project-highlight {
+            background-color: #252729;
+            color: var(--text-dark);
+        }
+        body.dark-mode .video-slider-container {
+            background-color: #202225 !important;
+            border-color: #414448 !important;
+        }
+        body.dark-mode .project-case {
+            background-color: #292B2E;
+            border-color: #414448;
+        }
+        body.dark-mode .case-block {
+            background-color: #323437;
+            border-color: #45484B;
+        }
+        body.dark-mode .case-block.tools-block {
+            background-color: #3B352F;
+            border-color: #A9825E;
+        }
+        body.dark-mode .tools-block h4 {
+            color: #F2C28E;
+        }
+        body.dark-mode .tools-block .case-tools span {
+            background-color: #4B4137;
+            border-color: #B28A62;
+            color: #FFF4E8;
+        }
+        body.dark-mode .portfolio-info {
+            background-color: #292B2E !important;
+            border-color: #414448;
+        }
+        body.dark-mode .tag-item {
+            background-color: #292B2E !important;
+            border-color: #49413B !important;
+            color: var(--text-dark);
+        }
+        body.dark-mode .resume-entry:hover {
+            background-color: #252729;
+        }
+        body.dark-mode .resume-entry::before {
+            border-color: #191A1C;
+        }
+        body.dark-mode .hero h1 span[style*="#000000"] {
+            color: var(--text-dark) !important;
+        }
+        @media (max-width: 768px) {
+            .theme-toggle {
+                min-width: 40px;
+                padding: 9px;
+            }
+            .theme-toggle-label {
+                display: none;
+            }
+        }
+        @media (max-width: 1100px) {
+            nav {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+            nav ul {
+                gap: 16px;
+            }
+            nav .logo {
+                font-size: 1.3rem;
+            }
+            .case-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            .resume-grid {
+                gap: 28px;
+            }
+        }
+        @media (max-width: 768px) {
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
+            .resume-social {
+                flex-wrap: wrap;
+            }
+            .video-slider-container {
+                padding: 28px 14px;
+            }
+        }
+        @media (max-width: 600px) {
+            section {
+                padding: 48px 16px;
+            }
+            .hero {
+                height: auto;
+                min-height: 100vh;
+                min-height: 100svh;
+                padding: 110px 16px 48px;
+            }
+            .hero h1 {
+                font-size: clamp(1.8rem, 8vw, 2.5rem);
+                overflow-wrap: anywhere;
+            }
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 36px;
+            }
+            .portfolio-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+            .filter-buttons {
+                gap: 8px;
+                margin-bottom: 28px;
+            }
+            .filter-btn {
+                min-height: 44px;
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+            .video-slider {
+                gap: 14px;
+            }
+            .video-item {
+                flex: 0 0 min(85vw, 350px);
+            }
+            .project-case {
+                padding: 18px 14px;
+                border-radius: 16px;
+            }
+            .case-subtitle {
+                font-size: 0.95rem;
+            }
+            .gmm-artwork .highlight-img {
+                min-height: 72vw;
+            }
+            .gmm-artwork .process-preview {
+                width: min(28vw, 110px);
+                right: 10px;
+                bottom: 10px;
+            }
+            .gmm-artwork .highlight-info {
+                padding: 20px 16px !important;
+            }
+            .resume-entry {
+                padding-left: 22px;
+            }
+            #backToTop {
+                right: 16px;
+                bottom: 16px;
+                width: 46px;
+                height: 46px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -792,6 +1006,10 @@
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Switch to dark mode">
+            <span class="theme-toggle-icon" id="themeToggleIcon" aria-hidden="true">☾</span>
+            <span class="theme-toggle-label" id="themeToggleLabel">Dark mode</span>
+        </button>
         <div class="hamburger" id="hamburger">
             <span></span>
             <span></span>
@@ -905,14 +1123,14 @@
 
             <div class="resume-column">
                 <h3>Skills</h3>
-                <div class="skill-category">Video Editing And Music Creators</div>
+                <div class="skill-category">Video Editing skills</div>
                 <div class="skill-list video-group">
                     <div class="tag-item">Aegisub</div>
                     <div class="tag-item">CapCut</div>
                     <div class="tag-item">Premiere Pro</div>
                 </div>
 
-                <div class="skill-category">Design</div>
+                <div class="skill-category">Design skills</div>
                 <div class="skill-list design-group">
                     <div class="tag-item">Photoshop</div>
                     <div class="tag-item">Illustrator</div>
@@ -921,7 +1139,7 @@
                     <div class="tag-item">Figma</div>
                 </div>
 
-                <div class="skill-category">AI Tools</div>
+                <div class="skill-category">Creative thinking & AI Tools</div>
                 <div class="skill-list ai-group">
                     <div class="tag-item">Gemini</div>
                     <div class="tag-item">ChatGPT</div>
@@ -942,6 +1160,7 @@
                     <div class="tag-item">📺 ดูวาไรตี้/เกมโชว์</div>
                     <div class="tag-item">📰 ตามข่าวสารบ้านเมือง</div>
                     <div class="tag-item">🎮 เล่นเกม</div>
+                    <div class="tag-item interest-writing">✍️ เขียนนิยาย</div>
                     <div class="tag-item">📻 ฟังเพลงเก่ายุค90</div>
                     <div class="tag-item">📸 ถ่ายรูป</div>
                     <div class="tag-item">🎭 ชอบดูละครเวที</div>
@@ -982,7 +1201,7 @@
                                 <li>Thumbnail / Graphic Design</li>
                             </ul>
                         </div>
-                        <div class="case-block">
+                        <div class="case-block tools-block">
                             <h4>Tools</h4>
                             <div class="case-tools">
                                 <span>Photoshop</span>
@@ -1021,10 +1240,10 @@
             <div class="video-slider-container filter-item video" data-filter="internship" style="background-color: #F6F4FF; border-color: #E4DFFE; grid-column: 1 / -1; margin-top: 10px;">
                 <h3 style="font-size: 1.8rem; color: #5B4B8A; margin-bottom: 5px; text-align: center; text-shadow: 0 0 15px rgba(91, 75, 138, 0.18);">Official GMM Karaoke </h3>
                 <p style="text-align: center; color: var(--text-light); font-size: 0.9rem; margin-bottom: 20px;">คลิปเพลงได้มอบหมายในการทำซับเพลงคาราโอเกะ ลงเป็นทางการระหว่างฝึกงานที่บริษัท จีเอ็มเอ็ม แกรมมี่ จำกัด (มหาชน)</p>
-                <a href="https://www.youtube.com/watch?v=cpNA1zRM-X0" target="_blank" rel="noopener noreferrer" class="project-highlight" style="text-decoration: none; color: inherit; max-width: 900px; margin: 0 auto; display: flex; align-items: stretch;">
-                    <div class="highlight-img" style="flex: 0.8; min-height: 260px; position: relative;">
-                        <img src="นางฟ้ากลับสวรรค์.jpg" alt="นางฟ้ากลับสวรรค์" style="width: 100%; height: 100%; object-fit: cover;">
-                        <img src="Screenshot 2026-03-05 204034.png" alt="Process screenshot" style="position: absolute; right: 12px; bottom: 12px; width: 120px; height: auto; border-radius: 12px; border: 3px solid rgba(255,255,255,0.9); box-shadow: 0 8px 20px rgba(0,0,0,0.15); object-fit: cover; background: #fff;">
+                <a href="https://www.youtube.com/watch?v=cpNA1zRM-X0" target="_blank" rel="noopener noreferrer" class="project-highlight gmm-artwork" style="text-decoration: none; color: inherit; max-width: 1100px; margin: 0 auto; display: flex; align-items: stretch;">
+                    <div class="highlight-img">
+                        <img src="นางฟ้ากลับสวรรค์.jpg" alt="ชายหนุ่มตรี ชัยณรงค์ยืนมองไปด้านข้างท่ามกลางฉากหลังสีฟ้าอ่อนและต้นไม้เบลอ มีข้อความนางฟ้ากลับสวรรค์และตรี ชัยณรงค์บนภาพ พร้อมโลโก้ GMM Grammy ด้านขวา โทนภาพสงบและนุ่มนวล" style="width: 100%; height: 100%; object-fit: contain;">
+                        <img src="Screenshot 2026-03-05 204034.png" alt="Process screenshot" class="process-preview">
                     </div>
                     <div class="highlight-info" style="flex: 1; padding: 26px 30px;">
                         <h3 style="font-size: 1.8rem; margin-bottom: 10px;">เพลงนางฟ้ากลับสวรรค์ - ตรี ชัยณรงค์</h3>
@@ -1054,7 +1273,7 @@
                                 <li>Content Design</li>
                             </ul>
                         </div>
-                        <div class="case-block">
+                        <div class="case-block tools-block">
                             <h4>Tools</h4>
                             <div class="case-tools">
                                 <span>Photoshop</span>
@@ -1136,7 +1355,7 @@
                                 <li>Social Media Video</li>
                             </ul>
                         </div>
-                        <div class="case-block">
+                        <div class="case-block tools-block">
                             <h4>Tools</h4>
                             <div class="case-tools">
                                 <span>Premiere Pro</span>
@@ -1276,6 +1495,37 @@
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
             });
+        });
+
+        const themeToggle = document.getElementById('themeToggle');
+        const themeToggleIcon = document.getElementById('themeToggleIcon');
+        const themeToggleLabel = document.getElementById('themeToggleLabel');
+
+        function setDarkMode(enabled) {
+            document.body.classList.toggle('dark-mode', enabled);
+            themeToggle.setAttribute('aria-pressed', String(enabled));
+            themeToggle.setAttribute('aria-label', enabled ? 'Switch to light mode' : 'Switch to dark mode');
+            themeToggle.title = enabled ? 'Switch to light mode' : 'Switch to dark mode';
+            themeToggleIcon.textContent = enabled ? '☀' : '☾';
+            themeToggleLabel.textContent = enabled ? 'Light mode' : 'Dark mode';
+        }
+
+        let darkModeEnabled = false;
+        try {
+            darkModeEnabled = localStorage.getItem('portfolio-theme') === 'dark';
+        } catch (error) {
+            darkModeEnabled = false;
+        }
+        setDarkMode(darkModeEnabled);
+
+        themeToggle.addEventListener('click', () => {
+            darkModeEnabled = !document.body.classList.contains('dark-mode');
+            setDarkMode(darkModeEnabled);
+            try {
+                localStorage.setItem('portfolio-theme', darkModeEnabled ? 'dark' : 'light');
+            } catch (error) {
+                // Theme switching still works when browser storage is unavailable.
+            }
         });
 
         // 2. Category Filter Logic
