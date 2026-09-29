@@ -338,6 +338,11 @@
             text-decoration: underline;
             margin: 0 10px;
         }
+        .last-updated {
+            margin-top: 18px;
+            font-size: 0.78rem;
+            opacity: 0.82;
+        }
 
         /* --- Video Display Styles --- */
         .video-container {
@@ -610,6 +615,37 @@
             color: var(--text-dark);
             font-weight: 500;
         }
+        .graphic-work-frame {
+            margin-top: 22px;
+            padding: 20px;
+            border: 1px solid #E8D7C7;
+            border-radius: 18px;
+            background-color: rgba(255, 255, 255, 0.55);
+        }
+        .graphic-work-frame h4 {
+            margin: 0 0 14px;
+            color: var(--primary-color);
+            font-size: 1.25rem;
+            text-align: left;
+        }
+        .graphic-work-frame.artwork-frame .portfolio-image {
+            height: 300px;
+            object-fit: contain;
+            background-color: var(--secondary-color);
+        }
+        .editor-work-frame {
+            margin-top: 22px;
+            padding: 20px;
+            border: 1px solid #D8DDE5;
+            border-radius: 18px;
+            background-color: rgba(255, 255, 255, 0.55);
+        }
+        .editor-work-frame h4 {
+            margin: 0 0 14px;
+            color: #6D8299;
+            font-size: 1.25rem;
+            text-align: left;
+        }
         @media (max-width: 768px) {
             .case-grid {
                 grid-template-columns: 1fr;
@@ -860,6 +896,23 @@
             background-color: #323437;
             border-color: #45484B;
         }
+        body.dark-mode .graphic-work-frame {
+            background-color: #252729;
+            border-color: #6B5947;
+        }
+        body.dark-mode .graphic-work-frame h4 {
+            color: #E0AE7D;
+        }
+        body.dark-mode .graphic-work-frame.artwork-frame .portfolio-image {
+            background-color: #323437;
+        }
+        body.dark-mode .editor-work-frame {
+            background-color: #252729;
+            border-color: #526477;
+        }
+        body.dark-mode .editor-work-frame h4 {
+            color: #AFC9E4;
+        }
         body.dark-mode .case-block.tools-block {
             background-color: #3B352F;
             border-color: #A9825E;
@@ -1074,6 +1127,9 @@
                     <h4>บริษัท จีเอ็มเอ็ม แกรมมี่ จำกัด (มหาชน)</h4>
                     <p>ฝึกงานตำแหน่ง : Graphic Design and Music Creators<br>หน้าที่หลัก : จัด Playlist และทำ Content ให้กับ Social Media ของหน่วยงาน,
                         ตัดคลิปShorts คิดชื่อคลิป Playlist ลงช่องYouTubeของหน่วยงาน</p>
+                    <div class="resume-social">
+                        <a href="https://www.tiktok.com/@interngrammybig" target="_blank" rel="noopener noreferrer" class="social-link">🎵 TikTok: เด็กฝึกเจ็มบิ๊ก (ช่องรวมคอนเทนต์เด็กฝึก)</a>
+                    </div>
                 </div>
                 <div class="resume-entry">
                     <span class="date">มกราคม 2568 - ปัจจุบัน</span>
@@ -1285,36 +1341,48 @@
                     </div>
                 </div>
 
-                <p style="text-align: center; color: var(--text-light); font-size: 0.9rem; margin-bottom: 20px;">รวบรวมผลงานการออกแบบ Thumbnail และ Artwork ต่างๆ</p>
-                <div class="video-slider">
-                    <a href="#" class="video-item" style="text-decoration: none; color: inherit;">
-                        <img src="Ep2.png" alt="Free talk 2" class="portfolio-image">
-                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Free talk 2</h3><p>ทำThumbnailยูทูปช่องKurumi Maki Ch.</p></div>
-                    </a>
-                    <a href="#" class="video-item" style="text-decoration: none; color: inherit;">
-                        <img src="Ep1.png" alt="Free talk 1" class="portfolio-image">
-                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Free talk 1</h3><p>ทำThumbnailยูทูปช่องKurumi Maki Ch.</p></div>
-                    </a>
-                    <a href="https://www.instagram.com/p/DXZfuAfk582/" target="_blank" class="video-item" style="text-decoration: none; color: inherit;">
-                        <img src="umjoon.jpg" alt="Happy Umkijoon Day" class="portfolio-image">
-                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Happy Umkijoon Day</h3><p>ทำArtworkในโอกาสวันเกิดศิลปิน</p></div>
-                    </a>
-                    <a href="#" class="video-item" style="text-decoration: none; color: inherit;">
-                        <img src="jin kyung.jpg" alt="Happy Jin Kyung Day" class="portfolio-image">
-                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Happy Jin Kyung Day</h3><p>ทำArtworkในโอกาสวันเกิดศิลปิน</p></div>
-                    </a>
-                    <a href="https://www.instagram.com/p/DR184SVE_lr/" target="_blank" class="video-item" style="text-decoration: none; color: inherit;">
-                        <img src="sungmin_page-0001.jpg" alt="Happy Sung Min Day" class="portfolio-image">
-                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Happy Sung Min Day</h3><p>ทำArtworkในโอกาสวันเกิดศิลปิน</p></div>
-                    </a>
-                    <a href="https://www.youtube.com/live/WLczOHtClmM?si=Z8hGPYfUGGa_-Yi1" target="_blank" class="video-item" style="text-decoration: none; color: inherit;">
-                        <img src="valo2.png" alt="(งานกราฟิกเกม Valorant + สงครามส่งด่วนที่ดังเป็นแสในตอนนั้น ทำให้ช่องยูทูปMr Zane)" class="portfolio-image">
-                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">(งานกราฟิกเกม Valorant + สงครามส่งด่วนที่ดังเป็นแสในตอนนั้น ทำให้ช่องยูทูปMr Zane)</h3><p>Graphic Design / YouTube Content</p></div>
-                    </a>
-                    <a href="#" class="video-item" style="text-decoration: none; color: inherit;">
-                        <img src="gartic phone.png" alt="ตัวอย่างThumbnail เกมgarticphone ยูทูปช่อง มู๊นมูน | Moonlight Ch." class="portfolio-image">
-                        <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">ตัวอย่างThumbnail เกมgarticphone ยูทูปช่อง มู๊นมูน | Moonlight Ch.</h3><p>Thumbnail สำหรับเกม Gartic Phone #VtubeTH</p></div>
-                    </a>
+                <div class="graphic-work-frame">
+                    <h4>Thumbnail Designs</h4>
+                    <div class="video-slider">
+                        <a href="#" class="video-item" style="text-decoration: none; color: inherit;">
+                            <img src="Ep2.png" alt="Free talk 2" class="portfolio-image">
+                            <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Free talk 2</h3><p>ทำThumbnailยูทูปช่องKurumi Maki Ch.</p></div>
+                        </a>
+                        <a href="#" class="video-item" style="text-decoration: none; color: inherit;">
+                            <img src="Ep1.png" alt="Free talk 1" class="portfolio-image">
+                            <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Free talk 1</h3><p>ทำThumbnailยูทูปช่องKurumi Maki Ch.</p></div>
+                        </a>
+                        <a href="https://www.youtube.com/live/WLczOHtClmM?si=Z8hGPYfUGGa_-Yi1" target="_blank" class="video-item" style="text-decoration: none; color: inherit;">
+                            <img src="valo2.png" alt="งานกราฟิกเกม Valorant และสงครามส่งด่วนสำหรับช่อง YouTube Mr Zane" class="portfolio-image">
+                            <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">งานกราฟิกเกม Valorant และสงครามส่งด่วน</h3><p>Thumbnail / YouTube Content</p></div>
+                        </a>
+                        <a href="#" class="video-item" style="text-decoration: none; color: inherit;">
+                            <img src="gartic phone.png" alt="ตัวอย่าง Thumbnail เกม Gartic Phone ช่อง Moonlight Ch." class="portfolio-image">
+                            <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Gartic Phone</h3><p>Thumbnail สำหรับช่อง Moonlight Ch.</p></div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="graphic-work-frame artwork-frame">
+                    <h4>Artwork Designs</h4>
+                    <div class="video-slider">
+                        <a href="https://www.instagram.com/p/DXZfuAfk582/" target="_blank" class="video-item" style="text-decoration: none; color: inherit;">
+                            <img src="umjoon.jpg" alt="Happy Umkijoon Day" class="portfolio-image">
+                            <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Happy Umkijoon Day</h3><p>Artwork ในโอกาสวันเกิดศิลปิน</p></div>
+                        </a>
+                        <a href="#" class="video-item" style="text-decoration: none; color: inherit;">
+                            <img src="jin kyung.jpg" alt="Happy Jin Kyung Day" class="portfolio-image">
+                            <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Happy Jin Kyung Day</h3><p>Artwork ในโอกาสวันเกิดศิลปิน</p></div>
+                        </a>
+                        <a href="https://www.instagram.com/p/DR184SVE_lr/" target="_blank" class="video-item" style="text-decoration: none; color: inherit;">
+                            <img src="sungmin_page-0001.jpg" alt="Happy Sung Min Day" class="portfolio-image">
+                            <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Happy Sung Min Day</h3><p>Artwork ในโอกาสวันเกิดศิลปิน</p></div>
+                        </a>
+                        <a href="#" class="video-item" style="text-decoration: none; color: inherit;">
+                            <img src="hbd shin dong.png" alt="Happy Shin Dong Day" class="portfolio-image">
+                            <div class="portfolio-info" style="background-color: #FFFFFF;"><h3 style="color: var(--accent-color);">Happy Shin Dong Day</h3><p>Artwork ในโอกาสวันเกิดศิลปิน</p></div>
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -1366,9 +1434,9 @@
                     </div>
                 </div>
 
-                <h3 style="font-size: 1.8rem; color: #D4A373; margin-bottom: 5px; text-align: center;">Video And Video Shots</h3>
-                <p style="text-align: center; color: #E2C08D; font-size: 0.9rem; margin-bottom: 20px;">รวมตัวอย่างคลิปที่ตนเองได้ทำมา</p>
-                <div class="video-slider">
+                <div class="editor-work-frame">
+                    <h4>Video</h4>
+                    <div class="video-slider">
                     <div class="video-item">
                         <div class="video-container"><iframe src="https://www.youtube.com/embed/g7m734R0EE4"></iframe></div>
                         <div class="portfolio-info">
@@ -1397,6 +1465,12 @@
                             <p style="color: var(--text-light); font-size: 0.85rem;">ทำให้ช่องยูทูปหนิ่งเอ๋อ🐬 1ในวีทูบโปรเจกต์วีทูเบอร์ สังกัด นอกทะเล (ชื่อยังไม่เป็นทางการ)</p>
                         </div>
                     </div>
+                    </div>
+                </div>
+
+                <div class="editor-work-frame">
+                    <h4>Video Shots</h4>
+                    <div class="video-slider">
                     <div class="video-item">
                         <div class="video-container"><iframe src="https://www.youtube.com/embed/3bqhz-SHofc"></iframe></div>
                         <div class="portfolio-info">
@@ -1417,6 +1491,7 @@
                             <h3>ตาๆต้องชื้อแว่นแล้วบ่เน้อออ #ศิริพรอำไพพงษ์ </h3>
                             <p style="color: var(--text-light); font-size: 0.85rem;">คลิปสั้น Video Shot</p>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -1441,6 +1516,7 @@
             <a href="kawintida323@gmail.com">Email Me</a> | 
             <a href="https://www.linkedin.com/in/kawintida-panyachai-5b380b3a1" target="_blank">LinkedIn</a>
         </p>
+        <p class="last-updated">อัปเดตเว็บไซต์ล่าสุด: <time id="lastUpdated">กำลังโหลด...</time></p>
     </section>
 
     <script>
@@ -1527,6 +1603,17 @@
                 // Theme switching still works when browser storage is unavailable.
             }
         });
+
+        const lastUpdatedElement = document.getElementById('lastUpdated');
+        const lastUpdatedDate = new Date(document.lastModified);
+        if (!Number.isNaN(lastUpdatedDate.getTime())) {
+            lastUpdatedElement.dateTime = lastUpdatedDate.toISOString();
+            lastUpdatedElement.textContent = new Intl.DateTimeFormat('th-TH', {
+                dateStyle: 'medium',
+                timeStyle: 'short',
+                timeZone: 'Asia/Bangkok'
+            }).format(lastUpdatedDate);
+        }
 
         // 2. Category Filter Logic
         function filterSelection(c) {
